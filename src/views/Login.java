@@ -4,9 +4,11 @@
  */
 package views;
 
+import DB.Petugas;
 import java.awt.*;
 import javax.swing.*;
-import session.Session;
+import tools.Session;
+import tools.Security;
 
 /**
  *
@@ -43,6 +45,7 @@ public class Login extends javax.swing.JFrame {
         labelForgot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelUtama.setBackground(new java.awt.Color(83, 113, 136));
@@ -125,28 +128,30 @@ public class Login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Silahkan hubungi administrator", "Pesan", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_labelForgotMouseClicked
 
-    private boolean checkPassword(char[] password) {
-        String data = new String(password);
-        boolean hasil = data.matches("[a-zA-Z0-9]+");
-        if (hasil) {
-            return false;
-        } else {
-            return true;
-        }
+    private void resetAll() {
+        usernameText.setText("");
+        passwordText.setText("");
     }
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String username = usernameText.getText();
         char[] password = passwordText.getPassword();
-        if (checkPassword(password)) {
-            JOptionPane.showMessageDialog(rootPane, "Terdapat Karakter Khusus", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else if(username.equals("admin") && new String(password).equals("admin")) {
-            JOptionPane.showMessageDialog(rootPane, "Aman", "Aman", JOptionPane.INFORMATION_MESSAGE);
-            Session.setRole("Petugas");
-            new NewFrame().setVisible(true);
+        if (Security.validatePassword(password)) {
+            JOptionPane.showMessageDialog(null, "Terdapat Karakter Khusus di Password", "Pesan", JOptionPane.WARNING_MESSAGE);
+            resetAll();
+        } else if (username.isEmpty() || password.length == 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan isi Username dan Password anda", "Pesan", JOptionPane.WARNING_MESSAGE);
+
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Username dan Password anda salah", "Gagal", JOptionPane.ERROR_MESSAGE);        
+            if (petugas.authLogin(username, new String(password))) {
+                JOptionPane.showMessageDialog(null, "Berhasil Login", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+                Session.setAll(petugas.getDataUser(username));
+                new DaftarBarang().setVisible(true);
+                setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Masukkan Username dan Password dengan benar", "Gagal Login", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -185,6 +190,7 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
+    private Petugas petugas = new Petugas("petugas");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel gambar;

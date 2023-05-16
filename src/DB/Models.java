@@ -5,6 +5,8 @@
 package DB;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -18,8 +20,35 @@ public class Models {
         String pisahTitik = this.getClass().toString();
         pisahTitik = pisahTitik.substring(pisahTitik.indexOf('.') + 1).toLowerCase();
         this.table = pisahTitik;
-        System.out.println(getKoneksi());
-        System.out.println(table);
+    }
+
+    public int getTotalData() {
+        String QUERY = "SELECT COUNT(\'*\') FROM " + table;
+        try {
+            Connection koneksi = getKoneksi();
+            Statement st = koneksi.createStatement();
+            ResultSet rs = st.executeQuery(QUERY);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public int getTotalColumn() {
+        String QUERY = "SELECT * FROM " + table;
+        try {
+            Connection koneksi = getKoneksi();
+            Statement st = koneksi.createStatement();
+            ResultSet rs = st.executeQuery(QUERY);
+            ResultSetMetaData metaData = rs.getMetaData();
+            return metaData.getColumnCount();
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+        return 0;
     }
 
     public Models(String tableName) {
@@ -30,17 +59,15 @@ public class Models {
         Connection koneksi = null;
         try {
             koneksi = DriverManager.getConnection("jdbc:mysql://localhost:3306/gudang", "root", "");
-            System.out.println("Berhasil Konek");
             return koneksi;
         } catch (SQLException err) {
-            System.out.println("Gagal Konek");
             err.printStackTrace();
         }
         return koneksi;
     }
 
-    protected void selectAll() {
-        String QUERY = "SELECT * FROM barang";
+    protected void select(String column) {
+        String QUERY = "SELECT * FROM " + table;
         try {
             Connection koneksi = this.getKoneksi();
             Statement statement = koneksi.createStatement();
@@ -54,11 +81,27 @@ public class Models {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void show() {
-        System.out.println(this.table);
+    protected Object[][] selectAll() {
+        String QUERY = "SELECT * FROM " + table;
+        int totalData = this.getTotalData();
+        int totalColumn = this.getTotalColumn();
+        Object[][] data = new Object[totalData][totalColumn];
+        try {
+            Connection koneksi = this.getKoneksi();
+            Statement statement = koneksi.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY);
+            int nomor = 0;
+            while (resultSet.next()) {
+                for(int i = 1, j = 0; i <= totalColumn; i++){
+                    data[nomor][j++] = resultSet.getString(i);
+                }
+                nomor++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
-
 }

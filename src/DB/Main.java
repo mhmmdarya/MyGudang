@@ -3,15 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DB;
-import java.sql.*;
+
+import java.util.Arrays;
 
 /**
  *
  * @author ASUS
  */
-public class Barang extends Models {
-
-    public Barang(String tableName) {
-        super(tableName);
+public class Main {
+    public static void main(String[] args) {
+        Petugas petugas = new Petugas("petugas");
+        System.out.println(Arrays.toString(petugas.getDataUser("admin")));
     }
 }
