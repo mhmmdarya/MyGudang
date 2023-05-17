@@ -4,7 +4,7 @@
  */
 package views;
 
-import DB.Barang;
+import DB.*;
 import javax.swing.JOptionPane;
 import tools.Session;
 
@@ -23,6 +23,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
         labelNama.setText(nama);
         labelJmlBarang.setText("" + barang.getTotalData());
+        labelTransaksi.setText("" + barangKeluar.getTotalData());
     }
 
     /**
@@ -40,6 +41,14 @@ public class DaftarBarang extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         labelJmlBarang = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        panelBarang2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        labelTransaksi1 = new javax.swing.JLabel();
+        panelBarang1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        labelTransaksi = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,7 +60,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelNama.setForeground(new java.awt.Color(255, 255, 255));
         labelNama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelNama.setText("nama");
-        jPanel1.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 590, -1));
+        jPanel1.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 590, -1));
 
         panelBarang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -66,7 +75,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelJmlBarang.setText("0");
         panelBarang.add(labelJmlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 210, 80));
+        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 210, 80));
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -74,9 +83,47 @@ public class DaftarBarang extends javax.swing.JFrame {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
+        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            barang.getDataBarang(),
+            listBarang
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 750, 510));
+
+        panelBarang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Transaksi Barang Masuk");
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        panelBarang2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
+
+        labelTransaksi1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelTransaksi1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTransaksi1.setText("0");
+        panelBarang2.add(labelTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
+
+        jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 210, 80));
+
+        panelBarang1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Transaksi Barang Keluar");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        panelBarang1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
+
+        labelTransaksi.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelTransaksi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTransaksi.setText("0");
+        panelBarang1.add(labelTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
+
+        jPanel1.add(panelBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, 80));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,12 +175,22 @@ public class DaftarBarang extends javax.swing.JFrame {
     private String nama = Session.getName();
     private String role = Session.getRole();
     private Barang barang = new Barang("barang");
+    private BarangKeluar barangKeluar = new BarangKeluar("barang_keluar");
+    private String[] listBarang = {"ID", "Nama Barang", "Jumlah", "Nama Supplier"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelJmlBarang;
     private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel labelTransaksi;
+    private javax.swing.JLabel labelTransaksi1;
     private javax.swing.JPanel panelBarang;
+    private javax.swing.JPanel panelBarang1;
+    private javax.swing.JPanel panelBarang2;
     // End of variables declaration//GEN-END:variables
 }

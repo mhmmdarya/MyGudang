@@ -23,13 +23,13 @@ public class Barang extends Models {
             Connection koneksi = super.getKoneksi();
             Statement st = koneksi.createStatement();
             ResultSet rs = st.executeQuery(QUERY);
+            int nomor = 0;
             while (rs.next()) {
-                for (int i = 0; i < data.length; i++) {
-                    data[i][0] = rs.getInt(1);
-                    data[i][1] = rs.getString(2);
-                    data[i][2] = rs.getString(3);
-                    data[i][3] = rs.getString(4);
+                for (int i = 0, j = 1; i < 4; i++) {
+                    data[nomor][i] = rs.getString(j);
+                    j++;
                 }
+                nomor++;
             }
             return data;
         } catch (SQLException err) {

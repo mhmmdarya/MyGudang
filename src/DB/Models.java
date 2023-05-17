@@ -22,6 +22,10 @@ public class Models {
         this.table = pisahTitik;
     }
 
+    public Models(String tableName) {
+        this.table = tableName;
+    }
+
     public int getTotalData() {
         String QUERY = "SELECT COUNT(\'*\') FROM " + table;
         try {
@@ -36,7 +40,7 @@ public class Models {
         }
         return 0;
     }
-    
+
     public int getTotalColumn() {
         String QUERY = "SELECT * FROM " + table;
         try {
@@ -49,10 +53,6 @@ public class Models {
             err.printStackTrace();
         }
         return 0;
-    }
-
-    public Models(String tableName) {
-        this.table = tableName;
     }
 
     protected Connection getKoneksi() {
@@ -94,7 +94,7 @@ public class Models {
             ResultSet resultSet = statement.executeQuery(QUERY);
             int nomor = 0;
             while (resultSet.next()) {
-                for(int i = 1, j = 0; i <= totalColumn; i++){
+                for (int i = 1, j = 0; i <= totalColumn; i++) {
                     data[nomor][j++] = resultSet.getString(i);
                 }
                 nomor++;
