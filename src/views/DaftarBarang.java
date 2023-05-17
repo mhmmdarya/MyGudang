@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
+
+import DB.Barang;
+import javax.swing.JOptionPane;
 import tools.Session;
 
 /**
@@ -17,8 +20,9 @@ public class DaftarBarang extends javax.swing.JFrame {
     public DaftarBarang() {
         initComponents();
         setLocationRelativeTo(null);
-        jLabel1.setText(Session.getName());
-        jLabel2.setText(Session.getRole());
+        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
+        labelNama.setText(nama);
+        labelJmlBarang.setText("" + barang.getTotalData());
     }
 
     /**
@@ -31,25 +35,58 @@ public class DaftarBarang extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        labelNama = new javax.swing.JLabel();
+        panelBarang = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        labelJmlBarang = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(83, 113, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("LABEL USERNAME");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 94, 153, -1));
+        labelNama.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(255, 255, 255));
+        labelNama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNama.setText("nama");
+        jPanel1.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 590, -1));
 
-        jLabel2.setText("LABEL ROLE");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 128, 153, -1));
+        panelBarang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Total Barang");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        panelBarang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
+
+        labelJmlBarang.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelJmlBarang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelJmlBarang.setText("0");
+        panelBarang.add(labelJmlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
+
+        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 210, 80));
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        Session.resetAll();
+        new Login().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,10 +123,17 @@ public class DaftarBarang extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    
+    private String nama = Session.getName();
+    private String role = Session.getRole();
+    private Barang barang = new Barang("barang");
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelJmlBarang;
+    private javax.swing.JLabel labelNama;
+    private javax.swing.JPanel panelBarang;
     // End of variables declaration//GEN-END:variables
 }

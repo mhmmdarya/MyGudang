@@ -27,6 +27,11 @@ public class Session {
         return Session.name;
     }
     
+    public static void resetAll(){
+        Session.name = "";
+        Session.role = "";
+    }
+    
 //    public static void setPassword(String password) {
 //        Session.role = password;
 //    }
