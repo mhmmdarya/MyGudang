@@ -3,15 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tools;
-import io.github.cdimascio.dotenv.*;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 /**
  *
  * @author ASUS
  */
-public class Main {
-    public static void main(String[] args) {
-        Dotenv env = Dotenv.load();
-        System.out.println(env.get("NAMA"));
+public class Config {
+    public static String env(String variabelName){
+        Dotenv dotenv = Dotenv.load();
+        return dotenv.get(variabelName);
     }
 }

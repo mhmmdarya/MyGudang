@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2023 at 12:36 PM
+-- Generation Time: May 18, 2023 at 02:25 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -45,7 +45,7 @@ INSERT INTO `barang` (`id_barang`, `nama`, `jumlah`, `id_supplier`) VALUES
 (4, 'Plqots', 64, 1),
 (5, 'Orange', 75, 19),
 (6, 'mrape plus', 85, 1),
-(7, 'xAppze', 21, 13),
+(7, 'xAppze', 0, 13),
 (8, 'Kmwi plus', 68, 16),
 (9, 'iRambutxn', 16, 9),
 (10, 'xRambutan', 43, 19),
@@ -73,6 +73,13 @@ CREATE TABLE `barang_keluar` (
   `id_barang` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `barang_keluar`
+--
+
+INSERT INTO `barang_keluar` (`id_transaksi`, `tanggal_keluar`, `jumlah`, `id_barang`, `id_petugas`) VALUES
+(1, '2023-05-17', 21, 7, 1);
 
 --
 -- Triggers `barang_keluar`
@@ -128,8 +135,8 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `nama`, `jenis_kelamin`, `email`, `username`, `password`, `role`) VALUES
-(1, 'Muhammad Arya', 'Pria', 'muhammad@gmail.com', 'admin', 'admin', 'Admin'),
-(2, 'Muhammad Imam', 'Pria', 'imam@gmail.com', 'imam', 'admin', 'Petugas');
+(1, 'Muhammad Arya', 'Pria', 'muhammad@gmail.com', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin'),
+(2, 'Muhammad Imam', 'Pria', 'imam@gmail.com', 'imam', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Petugas');
 
 -- --------------------------------------------------------
 
@@ -224,7 +231,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`

@@ -7,6 +7,7 @@ package DB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import tools.Config;
 
 /**
  *
@@ -58,7 +59,7 @@ public class Models {
     protected Connection getKoneksi() {
         Connection koneksi = null;
         try {
-            koneksi = DriverManager.getConnection("jdbc:mysql://localhost:3306/gudang", "root", "");
+            koneksi = DriverManager.getConnection("jdbc:mysql://localhost:"+ Config.env("PORT") + "/" + Config.env("DATABASE_NAME"), Config.env("DB_USERNAME"), Config.env("DB_PASSWORD"));
             return koneksi;
         } catch (SQLException err) {
             err.printStackTrace();

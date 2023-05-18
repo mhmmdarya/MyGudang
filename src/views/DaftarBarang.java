@@ -20,8 +20,8 @@ public class DaftarBarang extends javax.swing.JFrame {
     public DaftarBarang() {
         initComponents();
         setLocationRelativeTo(null);
-        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
-        labelNama.setText(nama);
+//        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
+//        labelNama.setText(nama);
         labelJmlBarang.setText("" + barang.getTotalData());
         labelTransaksi.setText("" + barangKeluar.getTotalData());
     }
@@ -36,11 +36,9 @@ public class DaftarBarang extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        labelNama = new javax.swing.JLabel();
         panelBarang = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labelJmlBarang = new javax.swing.JLabel();
-        btnLogout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         panelBarang2 = new javax.swing.JPanel();
@@ -49,18 +47,17 @@ public class DaftarBarang extends javax.swing.JFrame {
         panelBarang1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         labelTransaksi = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        labelNama = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(83, 113, 136));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        labelNama.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        labelNama.setForeground(new java.awt.Color(255, 255, 255));
-        labelNama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelNama.setText("nama");
-        jPanel1.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 590, -1));
 
         panelBarang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -75,15 +72,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelJmlBarang.setText("0");
         panelBarang.add(labelJmlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 210, 80));
-
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, -1));
+        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 210, 80));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             barang.getDataBarang(),
@@ -91,7 +80,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 750, 510));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 950, 510));
 
         panelBarang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -106,7 +95,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelTransaksi1.setText("0");
         panelBarang2.add(labelTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 210, 80));
+        jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 210, 80));
 
         panelBarang1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,9 +110,35 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelTransaksi.setText("0");
         panelBarang1.add(labelTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, 80));
+        jPanel1.add(panelBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, 80));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 700));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelNama.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(51, 51, 51));
+        labelNama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNama.setText("nama");
+        jPanel2.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 590, 30));
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 50));
+
+        jButton1.setText("Tambah Barang Baru");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 170, 160, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -134,6 +149,11 @@ public class DaftarBarang extends javax.swing.JFrame {
         new Login().setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new TambahBarang().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,10 +199,12 @@ public class DaftarBarang extends javax.swing.JFrame {
     private String[] listBarang = {"ID", "Nama Barang", "Jumlah", "Nama Supplier"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelJmlBarang;
