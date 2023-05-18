@@ -67,22 +67,6 @@ public class Models {
         return koneksi;
     }
 
-    protected void select(String column) {
-        String QUERY = "SELECT * FROM " + table;
-        try {
-            Connection koneksi = this.getKoneksi();
-            Statement statement = koneksi.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY);
-            while (resultSet.next()) {
-                String nama = resultSet.getString("nama");
-                String jumlah = resultSet.getString("jumlah");
-
-                System.out.println("Kolom 1: " + nama + ", Kolom 2: " + jumlah);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     protected Object[][] selectAll() {
         String QUERY = "SELECT * FROM " + table;

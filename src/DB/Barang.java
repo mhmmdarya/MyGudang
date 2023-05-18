@@ -16,6 +16,26 @@ public class Barang extends Models {
         super(tableName);
     }
 
+    public Object[] getDataBarangById(int id) {
+        Object[] data = new Object[super.getTotalColumn()];
+        String sql = "SELECT * FROM barang WHERE id_barang=?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            int nomor = 0;
+            if (rs.next()) {
+                for (int i = 1, j = 0; i <= super.getTotalColumn(); i++) {
+                    data[j++] = rs.getString(i);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     public Object[][] getDataBarang() {
         Object[][] data = new Object[super.getTotalData()][4];
         String QUERY = "SELECT barang.id_barang, barang.nama, barang.jumlah, supplier.nama AS nama_supplier FROM barang INNER JOIN supplier USING(id_supplier)";

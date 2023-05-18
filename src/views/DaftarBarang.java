@@ -22,6 +22,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 //        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
 //        labelNama.setText(nama);
+        editBtn.setVisible(false);
         labelJmlBarang.setText("" + barang.getTotalData());
         labelTransaksi.setText("" + barangKeluar.getTotalData());
     }
@@ -51,6 +52,8 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelNama = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        idTxt = new javax.swing.JTextField();
+        editBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -59,15 +62,18 @@ public class DaftarBarang extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelBarang.setBackground(new java.awt.Color(51, 47, 208));
         panelBarang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Total Barang");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
         labelJmlBarang.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelJmlBarang.setForeground(new java.awt.Color(255, 255, 255));
         labelJmlBarang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelJmlBarang.setText("0");
         panelBarang.add(labelJmlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
@@ -78,34 +84,45 @@ public class DaftarBarang extends javax.swing.JFrame {
             barang.getDataBarang(),
             listBarang
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 950, 510));
 
+        panelBarang2.setBackground(new java.awt.Color(84, 180, 53));
         panelBarang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Transaksi Barang Masuk");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
         labelTransaksi1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelTransaksi1.setForeground(new java.awt.Color(255, 255, 255));
         labelTransaksi1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTransaksi1.setText("0");
         panelBarang2.add(labelTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
         jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 210, 80));
 
+        panelBarang1.setBackground(new java.awt.Color(237, 43, 42));
         panelBarang1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Transaksi Barang Keluar");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
         labelTransaksi.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelTransaksi.setForeground(new java.awt.Color(255, 255, 255));
         labelTransaksi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTransaksi.setText("0");
         panelBarang1.add(labelTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
@@ -137,6 +154,15 @@ public class DaftarBarang extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 170, 160, 30));
+        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 180, -1));
+
+        editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(665, 170, 130, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
@@ -152,8 +178,21 @@ public class DaftarBarang extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new TambahBarang().setVisible(true);
+        new EditBarang().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int nomor = jTable1.getSelectedRow();
+        this.idBarang = nomor;
+        idTxt.setText(jTable1.getValueAt(nomor, 0).toString());
+        editBtn.setVisible(true);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+        new EditBarang(this.idBarang).setVisible(true);
+    }//GEN-LAST:event_editBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +230,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         });
     }
     
-    
+    private int idBarang = 0;
     private String nama = Session.getName();
     private String role = Session.getRole();
     private Barang barang = new Barang("barang");
@@ -199,6 +238,8 @@ public class DaftarBarang extends javax.swing.JFrame {
     private String[] listBarang = {"ID", "Nama Barang", "Jumlah", "Nama Supplier"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton editBtn;
+    private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

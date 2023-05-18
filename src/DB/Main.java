@@ -11,11 +11,16 @@ import java.util.Arrays;
  * @author ASUS
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-        BarangKeluar br = new BarangKeluar("barang_keluar");
-        System.out.println(Arrays.deepToString(br.selectAll()));
-        
+        //        Models supp = new Supplier("supplier");
+        //        System.out.println(Arrays.deepToString(supp.selectAll()));
+//        Barang br = new Barang("barang");
+//        System.out.println(br.);
+//        System.out.println(Arrays.deepToString(br.getDataBarangById(3)));
+        Supplier sp = new Supplier("supplier");
+//        System.err.println(Arrays.deepToString(sp.getList()));
+        System.out.println(sp.findId("Carl Trading LLC"));
     }
-    
+
 }
