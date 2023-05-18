@@ -5,6 +5,7 @@
 package DB;
 
 import java.sql.*;
+import tools.Security;
 
 /**
  *
@@ -35,7 +36,8 @@ public class Petugas extends Models {
     }
 
     public boolean authLogin(String username, String password) {
-        String QUERY = "SELECT * FROM " + super.table + " WHERE username=? AND password=?";
+        password = Security.hashPassword(password);
+        String QUERY = "SELECT username, password FROM " + super.table + " WHERE username=? AND password=?";
         try {
             Connection koneksi = super.getKoneksi();
             PreparedStatement st = koneksi.prepareCall(QUERY);
@@ -43,7 +45,7 @@ public class Petugas extends Models {
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return true;
+                return Security.compareHash(password, rs.getString(2));
             }
         } catch (SQLException err) {
             err.printStackTrace();

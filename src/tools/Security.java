@@ -49,7 +49,6 @@ public class Security {
     * 
     */
     public static boolean compareHash(String input, String hash){
-        String rs = hashPassword(input);
-        return rs.equals(hash);
+        return input.equals(hash);
     }
 }

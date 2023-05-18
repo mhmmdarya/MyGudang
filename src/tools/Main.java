@@ -11,12 +11,7 @@ package tools;
 public class Main {
 
     public static void main(String[] args) {
-        String pass = "admi";
         String hash = Security.hashPassword("admin");
-        if (Security.compareHash(pass, hash)) {
-            System.out.println("Okee");
-        } else {
-            System.out.println("Gagal");
-        }
+        System.out.println(hash);
     }
 }
