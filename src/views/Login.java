@@ -126,6 +126,7 @@ public class Login extends javax.swing.JFrame {
     private void labelForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelForgotMouseClicked
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(rootPane, "Silahkan hubungi administrator", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+        new LupaPass().setVisible(true);
     }//GEN-LAST:event_labelForgotMouseClicked
 
     private void resetAll() {
