@@ -2,18 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package views;
+package views.login;
+
+import DB.Petugas;
+import javax.swing.JOptionPane;
+import tools.Security;
+import java.util.Arrays;
 
 /**
  *
  * @author ASUS
  */
-public class LupaPass extends javax.swing.JFrame {
+public class ForgotPassword extends javax.swing.JFrame {
 
     /**
      * Creates new form LupaPass
      */
-    public LupaPass() {
+    public ForgotPassword() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -32,15 +37,15 @@ public class LupaPass extends javax.swing.JFrame {
         emailTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        repeatPass = new javax.swing.JPasswordField();
-        inputPass = new javax.swing.JPasswordField();
+        repeatPassTxt = new javax.swing.JPasswordField();
+        passTxt = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         buttonEntry = new javax.swing.JButton();
         usernameTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(83, 113, 136));
@@ -63,15 +68,16 @@ public class LupaPass extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Username");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
-        jPanel1.add(repeatPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 200, -1));
-        jPanel1.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 200, -1));
+        jPanel1.add(repeatPassTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 200, -1));
+        jPanel1.add(passTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 200, -1));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Email");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        buttonEntry.setText("Masukkan");
+        buttonEntry.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        buttonEntry.setText("Reset Password");
         buttonEntry.setBorder(null);
         buttonEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +102,32 @@ public class LupaPass extends javax.swing.JFrame {
 
     private void buttonEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntryActionPerformed
         // TODO add your handling code here:
+        String username = usernameTxt.getText();
+        String email = emailTxt.getText();
+        char[] pass = passTxt.getPassword();
+        char[] repeatPass = repeatPassTxt.getPassword();
+        if (username.isEmpty() || email.isEmpty() || passTxt.getText().isEmpty() || repeatPassTxt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Silahkan isi data dengan lengkap", "Pesan", JOptionPane.WARNING_MESSAGE);
+        } else if (Security.validatePassword(pass) || Security.validatePassword(repeatPass)) {
+            JOptionPane.showMessageDialog(null, "Terdapat Karakter Khusus di Password", "Pesan", JOptionPane.WARNING_MESSAGE);
+            passTxt.setText("");
+            repeatPassTxt.setText("");
+        } else if (!Arrays.equals(pass, repeatPass)) {
+            JOptionPane.showMessageDialog(null, "Masukkan password dengan benar", "Pesan", JOptionPane.WARNING_MESSAGE);
+            passTxt.setText("");
+            repeatPassTxt.setText("");
+        } else {
+            if (petugasModel.checkUser(username, email)) {
+                String input = "kosong";
+                do {
+                    input = JOptionPane.showInputDialog(null, "Masukkan Captcha:\n" + captcha, "", JOptionPane.WARNING_MESSAGE);
+                } while (!Security.compareCaptcha(input, captcha));
+                petugasModel.updatePassword(username, new String(pass));
+                JOptionPane.showMessageDialog(null, "Berhasil mengganti Password", "", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Username dan email anda belum terdaftar", "Pesan", JOptionPane.WARNING_MESSAGE);
+            }
+        };
     }//GEN-LAST:event_buttonEntryActionPerformed
 
     /**
@@ -115,28 +147,30 @@ public class LupaPass extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LupaPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LupaPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LupaPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LupaPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LupaPass().setVisible(true);
+                new ForgotPassword().setVisible(true);
             }
         });
     }
 
+    private String captcha = Security.generateCaptcha();
+    private Petugas petugasModel = new Petugas("petugas");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEntry;
     private javax.swing.JTextField emailTxt;
-    private javax.swing.JPasswordField inputPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -144,7 +178,8 @@ public class LupaPass extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField repeatPass;
+    private javax.swing.JPasswordField passTxt;
+    private javax.swing.JPasswordField repeatPassTxt;
     private javax.swing.JTextField usernameTxt;
     // End of variables declaration//GEN-END:variables
 }

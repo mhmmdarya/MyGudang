@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package views;
+package views.barang;
 
+import views.login.Login;
 import DB.*;
 import javax.swing.JOptionPane;
 import tools.Session;
@@ -99,7 +100,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 950, 350));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 950, 500));
 
         panelBarang2.setBackground(new java.awt.Color(84, 180, 53));
         panelBarang2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -169,8 +170,8 @@ public class DaftarBarang extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 160, 30));
-        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 180, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 30));
+        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 192, 180, 30));
 
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -178,10 +179,10 @@ public class DaftarBarang extends javax.swing.JFrame {
                 editBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 130, 30));
+        jPanel1.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 130, 30));
 
         btnPetugas.setText("Daftar Petugas");
-        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
+        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 120, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
@@ -203,7 +204,7 @@ public class DaftarBarang extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int nomor = jTable1.getSelectedRow();
-        this.idBarang = nomor;
+        this.idBarang = Integer.parseInt(jTable1.getValueAt(nomor, 0).toString());
         idTxt.setText(jTable1.getValueAt(nomor, 0).toString());
         editBtn.setVisible(true);
     }//GEN-LAST:event_jTable1MouseClicked

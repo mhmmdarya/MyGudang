@@ -7,6 +7,7 @@ package tools;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 /**
  *
@@ -51,4 +52,21 @@ public class Security {
     public static boolean compareHash(String input, String hash){
         return input.equals(hash);
     }
+    
+    public static String generateCaptcha(){
+        final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder captcha = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 6; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            captcha.append(CHARACTERS.charAt(index));
+        }
+        return captcha.toString();
+    }
+    
+    public static boolean compareCaptcha(String input, String captcha){
+        return input.equals(captcha);
+    }
+    
 }

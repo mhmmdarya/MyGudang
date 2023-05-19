@@ -13,14 +13,10 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        //        Models supp = new Supplier("supplier");
-        //        System.out.println(Arrays.deepToString(supp.selectAll()));
-//        Barang br = new Barang("barang");
-//        System.out.println(br.);
-//        System.out.println(Arrays.deepToString(br.getDataBarangById(3)));
-        Supplier sp = new Supplier("supplier");
-//        System.err.println(Arrays.deepToString(sp.getList()));
-        System.out.println(sp.findId("Carl Trading LLC"));
+        Petugas db = new Petugas("petugas");
+        Barang br = new Barang("barang");
+        System.out.println(Arrays.toString(br.getDataBarangById(1)));
+//        db.updatePassword("imam", "admin");
     }
 
 }

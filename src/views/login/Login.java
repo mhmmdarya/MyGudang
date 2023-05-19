@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package views;
+package views.login;
 
 import DB.Petugas;
 import java.awt.*;
 import javax.swing.*;
 import tools.Session;
 import tools.Security;
+import views.barang.DaftarBarang;
 
 /**
  *
@@ -22,6 +23,10 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        // set icon
+        ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
+        setIconImage(icon.getImage());
     }
 
     /**
@@ -45,6 +50,7 @@ public class Login extends javax.swing.JFrame {
         labelForgot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImages(null);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,6 +90,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("Username");
         panelUtama.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
+        btnLogin.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnLogin.setText("LOGIN");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,8 +132,7 @@ public class Login extends javax.swing.JFrame {
 
     private void labelForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelForgotMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Silahkan hubungi administrator", "Pesan", JOptionPane.INFORMATION_MESSAGE);
-        new LupaPass().setVisible(true);
+        new ForgotPassword().setVisible(true);
     }//GEN-LAST:event_labelForgotMouseClicked
 
     private void resetAll() {
