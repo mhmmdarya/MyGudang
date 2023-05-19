@@ -21,10 +21,15 @@ public class DaftarBarang extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 //        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
-//        labelNama.setText(nama);
+        labelNama.setText(nama);
+        labelRole.setText(role);
         editBtn.setVisible(false);
         labelJmlBarang.setText("" + barang.getTotalData());
         labelTransaksi.setText("" + barangKeluar.getTotalData());
+        btnPetugas.setVisible(false);
+        if (role.equalsIgnoreCase("admin")) {
+            btnPetugas.setVisible(true);
+        }
     }
 
     /**
@@ -49,20 +54,23 @@ public class DaftarBarang extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         labelTransaksi = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        labelNama = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
+        labelNama = new javax.swing.JLabel();
+        labelRole = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         idTxt = new javax.swing.JTextField();
         editBtn = new javax.swing.JButton();
+        btnPetugas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(83, 113, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelBarang.setBackground(new java.awt.Color(51, 47, 208));
+        panelBarang.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panelBarang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -78,7 +86,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelJmlBarang.setText("0");
         panelBarang.add(labelJmlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 210, 80));
+        jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 210, 80));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             barang.getDataBarang(),
@@ -91,9 +99,10 @@ public class DaftarBarang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 950, 510));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 950, 350));
 
         panelBarang2.setBackground(new java.awt.Color(84, 180, 53));
+        panelBarang2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panelBarang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -109,9 +118,10 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelTransaksi1.setText("0");
         panelBarang2.add(labelTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 210, 80));
+        jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 210, 80));
 
         panelBarang1.setBackground(new java.awt.Color(237, 43, 42));
+        panelBarang1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panelBarang1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -127,15 +137,9 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelTransaksi.setText("0");
         panelBarang1.add(labelTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
-        jPanel1.add(panelBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, 80));
+        jPanel1.add(panelBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 80));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        labelNama.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        labelNama.setForeground(new java.awt.Color(51, 51, 51));
-        labelNama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelNama.setText("nama");
-        jPanel2.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 590, 30));
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +149,19 @@ public class DaftarBarang extends javax.swing.JFrame {
         });
         jPanel2.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 50));
+        labelNama.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(51, 51, 51));
+        labelNama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNama.setText("nama");
+        jPanel2.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 590, 30));
+
+        labelRole.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        labelRole.setForeground(new java.awt.Color(51, 51, 51));
+        labelRole.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelRole.setText("role");
+        jPanel2.add(labelRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 590, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 80));
 
         jButton1.setText("Tambah Barang Baru");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -153,8 +169,8 @@ public class DaftarBarang extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 170, 160, 30));
-        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 180, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 160, 30));
+        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 180, -1));
 
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +178,10 @@ public class DaftarBarang extends javax.swing.JFrame {
                 editBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(665, 170, 130, 30));
+        jPanel1.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 130, 30));
+
+        btnPetugas.setText("Daftar Petugas");
+        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
@@ -229,7 +248,7 @@ public class DaftarBarang extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private int idBarang = 0;
     private String nama = Session.getName();
     private String role = Session.getRole();
@@ -238,6 +257,7 @@ public class DaftarBarang extends javax.swing.JFrame {
     private String[] listBarang = {"ID", "Nama Barang", "Jumlah", "Nama Supplier"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnPetugas;
     private javax.swing.JButton editBtn;
     private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton1;
@@ -250,6 +270,7 @@ public class DaftarBarang extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelJmlBarang;
     private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel labelRole;
     private javax.swing.JLabel labelTransaksi;
     private javax.swing.JLabel labelTransaksi1;
     private javax.swing.JPanel panelBarang;
