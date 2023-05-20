@@ -9,7 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 import tools.Session;
 import tools.Security;
-import views.barang.DaftarBarang;
+import views.barang.Dashboard;
 
 /**
  *
@@ -154,7 +154,7 @@ public class Login extends javax.swing.JFrame {
             if (petugas.authLogin(username, new String(password))) {
                 JOptionPane.showMessageDialog(null, "Berhasil Login", "Pesan", JOptionPane.INFORMATION_MESSAGE);
                 Session.setAll(petugas.getDataUser(username));
-                new DaftarBarang().setVisible(true);
+                new Dashboard().setVisible(true);
                 setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(null, "Masukkan Username dan Password dengan benar", "Gagal Login", JOptionPane.WARNING_MESSAGE);

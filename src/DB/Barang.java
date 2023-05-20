@@ -37,6 +37,21 @@ public class Barang extends Models {
         }
         return data;
     }
+    
+    public void insertBarang(String nama, int jumlah, int idSupplier){
+        String sql = "INSERT INTO barang(nama, jumlah, id_supplier) VALUES (?, ?, ?)";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, nama);
+            st.setInt(2, jumlah);
+            st.setInt(3, idSupplier);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+    }
 
     public Object[] getDataBarangById(int id) {
         Object[] data = new Object[super.getTotalColumn()];

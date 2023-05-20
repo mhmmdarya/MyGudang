@@ -8,6 +8,7 @@ import DB.Petugas;
 import javax.swing.JOptionPane;
 import tools.Security;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,6 +22,10 @@ public class ForgotPassword extends javax.swing.JFrame {
     public ForgotPassword() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        // set icon
+        ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
+        setIconImage(icon.getImage());
     }
 
     /**

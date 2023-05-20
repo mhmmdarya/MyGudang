@@ -6,6 +6,8 @@ package views.barang;
 
 import DB.Barang;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
+import views.login.Login;
 
 /**
  *
@@ -19,6 +21,10 @@ public class EditBarang extends javax.swing.JFrame {
     public EditBarang() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        // set icon
+        ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
+        setIconImage(icon.getImage());
     }
     
     public EditBarang(int id) {

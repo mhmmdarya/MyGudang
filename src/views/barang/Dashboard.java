@@ -6,6 +6,7 @@ package views.barang;
 
 import views.login.Login;
 import DB.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -17,14 +18,19 @@ import views.petugas.DaftarPetugas;
  *
  * @author ASUS
  */
-public class DaftarBarang extends javax.swing.JFrame {
+public class Dashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form NewFrame
      */
-    public DaftarBarang() {
+    public Dashboard() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        // set icon
+        ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
+        setIconImage(icon.getImage());
+        
 //        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
         labelNama.setText(nama);
         labelRole.setText(role);
@@ -66,8 +72,8 @@ public class DaftarBarang extends javax.swing.JFrame {
         findBarang = new javax.swing.JTextField();
         editBtn = new javax.swing.JButton();
         btnPetugas = new javax.swing.JButton();
-        test = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -200,15 +206,15 @@ public class DaftarBarang extends javax.swing.JFrame {
                 btnPetugasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 120, 30));
-
-        test.setText("jLabel4");
-        jPanel1.add(test, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 90, -1));
+        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 120, 30));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/inventory-icon-vector-11 (3).png"))); // NOI18N
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 80, 80));
+
+        jButton2.setText("Hapus");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 140, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 670));
 
@@ -224,14 +230,13 @@ public class DaftarBarang extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new EditBarang().setVisible(true);
+        new TambahBarang().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int nomor = jTable1.getSelectedRow();
         this.idBarang = Integer.parseInt(jTable1.getValueAt(nomor, 0).toString());
-        findBarang.setText(jTable1.getValueAt(nomor, 0).toString());
         editBtn.setVisible(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -243,7 +248,6 @@ public class DaftarBarang extends javax.swing.JFrame {
     private void findBarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_findBarangKeyTyped
         // TODO add your handling code here:
         String findName = findBarang.getText();
-        test.setText(findBarang.getText());
         Object[][] datas = Converter.convertArray(barang.findBarangByName(findName));
         jTable1.setModel(new DefaultTableModel(datas, listBarang));
     }//GEN-LAST:event_findBarangKeyTyped
@@ -270,28 +274,31 @@ public class DaftarBarang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DaftarBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DaftarBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DaftarBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DaftarBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DaftarBarang().setVisible(true);
+                new Dashboard().setVisible(true);
             }
         });
     }
 
     private int idBarang = 0;
     private String nama = Session.getName();
-    private String role = Session.getRole();
+//    private String role = Session.getRole();
+    private String role = "Admin";
     private Barang barang = new Barang("barang");
     private BarangKeluar barangKeluar = new BarangKeluar("barang_keluar");
     private String[] listBarang = {"ID", "Nama Barang", "Jumlah", "Nama Supplier"};
@@ -301,6 +308,7 @@ public class DaftarBarang extends javax.swing.JFrame {
     private javax.swing.JButton editBtn;
     private javax.swing.JTextField findBarang;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -317,6 +325,5 @@ public class DaftarBarang extends javax.swing.JFrame {
     private javax.swing.JPanel panelBarang;
     private javax.swing.JPanel panelBarang1;
     private javax.swing.JPanel panelBarang2;
-    private javax.swing.JLabel test;
     // End of variables declaration//GEN-END:variables
 }
