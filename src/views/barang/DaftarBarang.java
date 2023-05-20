@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import tools.Session;
 import tools.Converter;
+import views.petugas.DaftarPetugas;
 
 /**
  *
@@ -176,12 +177,13 @@ public class DaftarBarang extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 30));
 
+        findBarang.setText("Cari barang berdasarkan nama");
         findBarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 findBarangKeyTyped(evt);
             }
         });
-        jPanel1.add(findBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 192, 180, 30));
+        jPanel1.add(findBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 192, 270, 30));
 
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +194,11 @@ public class DaftarBarang extends javax.swing.JFrame {
         jPanel1.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 130, 30));
 
         btnPetugas.setText("Daftar Petugas");
+        btnPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPetugasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 120, 30));
 
         test.setText("jLabel4");
@@ -234,6 +241,11 @@ public class DaftarBarang extends javax.swing.JFrame {
         Object[][] datas = Converter.convertArray(barang.findBarangByName(findName));
         jTable1.setModel(new DefaultTableModel(datas, listBarang));
     }//GEN-LAST:event_findBarangKeyTyped
+
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+        // TODO add your handling code here:
+        new DaftarPetugas().setVisible(true);
+    }//GEN-LAST:event_btnPetugasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -36,6 +36,28 @@ public class Petugas extends Models {
         return hasil;
     }
 
+    public Object[][] getAllData() {
+        Object[][] hasil = new Object[super.getTotalData()][6];
+        String QUERY = "SELECT id_petugas, nama, jenis_kelamin, email, username, role FROM petugas";
+        try {
+            Connection koneksi = super.getKoneksi();
+            Statement st = koneksi.createStatement();
+            ResultSet rs = st.executeQuery(QUERY);
+            int nomor = 0;
+            while (rs.next()) {
+                for (int i = 0, j = 1; i < 6; i++) {
+                    hasil[nomor][i] = rs.getString(j);
+                    j++;
+                }
+                nomor++;
+            }
+            return hasil;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hasil;
+    }
+
     public void updatePassword(String username, String password) {
         String sql = "UPDATE petugas SET password = ? WHERE username = ?";
         try {
@@ -49,8 +71,8 @@ public class Petugas extends Models {
             e.printStackTrace();
         }
     }
-    
-    public boolean checkUser(String username, String email){
+
+    public boolean checkUser(String username, String email) {
         String sql = "SELECT * FROM petugas WHERE username=? AND email=?";
         try {
             Connection koneksi = super.getKoneksi();
@@ -58,7 +80,7 @@ public class Petugas extends Models {
             st.setString(1, username);
             st.setString(2, email);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
         } catch (SQLException e) {

@@ -320,12 +320,15 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="findBarang">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cari barang berdasarkan nama"/>
+          </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="findBarangKeyTyped"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="800" y="192" width="180" height="30"/>
+              <AbsoluteConstraints x="710" y="192" width="270" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -346,6 +349,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Daftar Petugas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPetugasActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="340" y="190" width="120" height="30"/>
