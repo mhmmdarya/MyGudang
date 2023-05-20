@@ -4,8 +4,8 @@
  */
 package DB;
 
-import java.util.Arrays;
-
+import java.util.*;
+import tools.Converter;
 /**
  *
  * @author ASUS
@@ -15,8 +15,9 @@ public class Main {
     public static void main(String[] args) {
         Petugas db = new Petugas("petugas");
         Barang br = new Barang("barang");
-        System.out.println(Arrays.toString(br.getDataBarangById(1)));
-//        db.updatePassword("imam", "admin");
+        ArrayList<Object[]> data = br.findBarangByName("a");
+        Object[][] datas = Converter.convertArray(data);
+        System.out.println(Arrays.deepToString(datas));
     }
 
 }

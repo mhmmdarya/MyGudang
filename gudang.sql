@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2023 at 02:25 PM
+-- Generation Time: May 20, 2023 at 11:03 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -39,26 +39,56 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama`, `jumlah`, `id_supplier`) VALUES
-(1, 'Raspberoy pi', 42, 16),
-(2, 'Mango', 52, 12),
-(3, 'iKiwi', 33, 2),
-(4, 'Plqots', 64, 1),
-(5, 'Orange', 75, 19),
-(6, 'mrape plus', 85, 1),
-(7, 'xAppze', 0, 13),
-(8, 'Kmwi plus', 68, 16),
-(9, 'iRambutxn', 16, 9),
-(10, 'xRambutan', 43, 19),
-(11, 'Strawberry', 90, 15),
-(12, 'Kfwi', 82, 1),
-(13, 'Kiwi', 11, 16),
-(14, 'iStrawberry', 14, 5),
-(15, 'iherry mini', 63, 18),
-(16, 'Pluots plus', 60, 2),
-(17, 'ambi-Raspberry', 37, 19),
-(18, 'Cherry premium', 94, 13),
-(19, 'Rambutan mini', 52, 13),
-(20, 'Grape', 18, 9);
+(1, 'Grape', 51, 18),
+(2, 'ultra-Rambutan', 49, 7),
+(3, 'Kiwi pro', 96, 15),
+(4, 'Adple plus', 20, 17),
+(5, 'Cherry mini', 49, 11),
+(6, 'Rambutan', 34, 3),
+(7, 'Raspberry', 36, 13),
+(8, 'Strawbnrry', 20, 2),
+(9, 'Appce core', 63, 4),
+(10, 'Grape', 67, 5),
+(11, 'Pvuots', 76, 18),
+(12, 'ipple', 18, 15),
+(13, 'Cherry premium', 11, 7),
+(14, 'Orange', 91, 13),
+(15, 'Chenry core', 65, 2),
+(16, 'Cheery', 56, 10),
+(17, 'ultra-Orange', 39, 18),
+(18, 'Raspbexry air', 11, 4),
+(19, 'Raspberry', 67, 13),
+(20, 'Orange mini', 29, 2),
+(21, 'Strawberry', 68, 8),
+(22, 'Rambftan', 26, 16),
+(23, 'Ktwi mini', 39, 16),
+(24, 'Raspberry se', 18, 7),
+(25, 'wiwi core', 91, 6),
+(26, 'Mango elite', 71, 6),
+(27, 'Rambugan', 83, 14),
+(28, 'Pluots', 31, 3),
+(29, 'Cherry', 58, 19),
+(30, 'Kiwi', 46, 14),
+(31, 'xKiwi', 63, 11),
+(32, 'Cherry', 32, 10),
+(33, 'Cmerry mini', 35, 11),
+(34, 'Rambutan se', 23, 3),
+(35, 'Rambytan', 29, 20),
+(36, 'Apple', 45, 2),
+(37, 'Cherry mini', 81, 11),
+(38, 'Raspberry', 18, 10),
+(39, 'Manyo', 92, 4),
+(40, 'Rambutan core', 15, 13),
+(41, 'opple', 36, 16),
+(42, 'Kowi', 51, 18),
+(43, 'Kawi mini', 100, 13),
+(44, 'ultra-Orange', 44, 9),
+(45, 'xMango', 42, 6),
+(46, 'Cwerry', 37, 4),
+(47, 'iStrawberry', 63, 3),
+(48, 'Apple elite', 94, 19),
+(49, 'ultra-Avple', 92, 5),
+(50, 'Gyape se', 65, 20);
 
 -- --------------------------------------------------------
 
@@ -73,13 +103,6 @@ CREATE TABLE `barang_keluar` (
   `id_barang` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `barang_keluar`
---
-
-INSERT INTO `barang_keluar` (`id_transaksi`, `tanggal_keluar`, `jumlah`, `id_barang`, `id_petugas`) VALUES
-(1, '2023-05-17', 21, 7, 1);
 
 --
 -- Triggers `barang_keluar`

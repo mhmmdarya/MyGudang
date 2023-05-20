@@ -5,6 +5,7 @@
 package DB;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +15,27 @@ public class Barang extends Models {
 
     public Barang(String tableName) {
         super(tableName);
+    }
+
+    public ArrayList<Object[]> findBarangByName(String name) {
+        String sql = "SELECT barang.id_barang, barang.nama, barang.jumlah, supplier.nama AS nama_supplier FROM barang INNER JOIN supplier USING (id_supplier) WHERE barang.nama LIKE \'%" + name + "%\'";
+        ArrayList<Object[]> data = new ArrayList<>();
+        try {
+            Connection koneksi = super.getKoneksi();
+            Statement st = koneksi.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String nama = rs.getString(2);
+                int jumlah = rs.getInt(3);
+                String namaSupplier = rs.getString(4);
+                data.add(new Object[]{id, nama, jumlah, namaSupplier});
+            }
+
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+        return data;
     }
 
     public Object[] getDataBarangById(int id) {

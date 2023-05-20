@@ -7,7 +7,10 @@ package views.barang;
 import views.login.Login;
 import DB.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import tools.Session;
+import tools.Converter;
 
 /**
  *
@@ -59,9 +62,10 @@ public class DaftarBarang extends javax.swing.JFrame {
         labelNama = new javax.swing.JLabel();
         labelRole = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        idTxt = new javax.swing.JTextField();
+        findBarang = new javax.swing.JTextField();
         editBtn = new javax.swing.JButton();
         btnPetugas = new javax.swing.JButton();
+        test = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -171,7 +175,13 @@ public class DaftarBarang extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 30));
-        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 192, 180, 30));
+
+        findBarang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                findBarangKeyTyped(evt);
+            }
+        });
+        jPanel1.add(findBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 192, 180, 30));
 
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +193,9 @@ public class DaftarBarang extends javax.swing.JFrame {
 
         btnPetugas.setText("Daftar Petugas");
         jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 120, 30));
+
+        test.setText("jLabel4");
+        jPanel1.add(test, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 90, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
@@ -205,7 +218,7 @@ public class DaftarBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
         int nomor = jTable1.getSelectedRow();
         this.idBarang = Integer.parseInt(jTable1.getValueAt(nomor, 0).toString());
-        idTxt.setText(jTable1.getValueAt(nomor, 0).toString());
+        findBarang.setText(jTable1.getValueAt(nomor, 0).toString());
         editBtn.setVisible(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -213,6 +226,14 @@ public class DaftarBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
         new EditBarang(this.idBarang).setVisible(true);
     }//GEN-LAST:event_editBtnActionPerformed
+
+    private void findBarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_findBarangKeyTyped
+        // TODO add your handling code here:
+        String findName = findBarang.getText();
+        test.setText(findBarang.getText());
+        Object[][] datas = Converter.convertArray(barang.findBarangByName(findName));
+        jTable1.setModel(new DefaultTableModel(datas, listBarang));
+    }//GEN-LAST:event_findBarangKeyTyped
 
     /**
      * @param args the command line arguments
@@ -260,7 +281,7 @@ public class DaftarBarang extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPetugas;
     private javax.swing.JButton editBtn;
-    private javax.swing.JTextField idTxt;
+    private javax.swing.JTextField findBarang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -277,5 +298,6 @@ public class DaftarBarang extends javax.swing.JFrame {
     private javax.swing.JPanel panelBarang;
     private javax.swing.JPanel panelBarang1;
     private javax.swing.JPanel panelBarang2;
+    private javax.swing.JLabel test;
     // End of variables declaration//GEN-END:variables
 }
