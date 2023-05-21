@@ -2,6 +2,7 @@ package tools;
 
 public class Session {
     
+    private static int id;
     private static String name;
 //    private static String password;
     private static String role;
@@ -14,9 +15,14 @@ public class Session {
         return Session.role;
     }
     
+    public static int getId(){
+        return Session.id;
+    }
+    
     public static void setAll(String data[]){
-        Session.name = data[0];
-        Session.role = data[1];
+        Session.id = Integer.parseInt(data[0]);
+        Session.name = data[1];
+        Session.role = data[2];
     }
     
     public static void setName(String username) {

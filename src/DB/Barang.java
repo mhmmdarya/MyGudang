@@ -38,6 +38,17 @@ public class Barang extends Models {
         return data;
     }
     
+    public void deleteBarang(int id){
+        String sql = "DELETE FROM barang WHERE id_barang=?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
     public void insertBarang(String nama, int jumlah, int idSupplier){
         String sql = "INSERT INTO barang(nama, jumlah, id_supplier) VALUES (?, ?, ?)";
         try {
@@ -75,7 +86,7 @@ public class Barang extends Models {
 
     public Object[][] getDataBarang() {
         Object[][] data = new Object[super.getTotalData()][4];
-        String QUERY = "SELECT barang.id_barang, barang.nama, barang.jumlah, supplier.nama AS nama_supplier FROM barang INNER JOIN supplier USING(id_supplier)";
+        String QUERY = "SELECT barang.id_barang, barang.nama, barang.jumlah, supplier.nama AS nama_supplier FROM barang INNER JOIN supplier USING(id_supplier) ORDER BY barang.id_barang";
         try {
             Connection koneksi = super.getKoneksi();
             Statement st = koneksi.createStatement();

@@ -15,9 +15,10 @@ public class Main {
     public static void main(String[] args) {
         Petugas db = new Petugas("petugas");
         Barang br = new Barang("barang");
-        ArrayList<Object[]> data = br.findBarangByName("a");
-        Object[][] datas = Converter.convertArray(data);
-        System.out.println(Arrays.deepToString(datas));
+//        br.deleteBarang(117);
+//        ArrayList<Object[]> data = br.findBarangByName("a");
+//        Object[][] datas = Converter.convertArray(data);
+//        System.out.println(Arrays.deepToString(datas));
     }
 
 }

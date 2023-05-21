@@ -18,8 +18,8 @@ public class Petugas extends Models {
     }
 
     public String[] getDataUser(String username) {
-        String[] hasil = new String[2];
-        String QUERY = "SELECT nama, role FROM petugas WHERE username=?";
+        String[] hasil = new String[3];
+        String QUERY = "SELECT id_petugas, nama, role FROM petugas WHERE username=?";
         try {
             Connection koneksi = super.getKoneksi();
             PreparedStatement st = koneksi.prepareCall(QUERY);
@@ -28,6 +28,7 @@ public class Petugas extends Models {
             if (rs.next()) {
                 hasil[0] = rs.getString(1);
                 hasil[1] = rs.getString(2);
+                hasil[2] = rs.getString(3);
             }
             return hasil;
         } catch (SQLException e) {
