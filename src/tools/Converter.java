@@ -4,6 +4,7 @@
  */
 package tools;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -19,5 +20,10 @@ public class Converter {
             datas[i] = data.get(i);
         }
         return datas;
+    }
+    
+    public static String formatTanggal(Date date) {
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        return formatDate.format(date);
     }
 }

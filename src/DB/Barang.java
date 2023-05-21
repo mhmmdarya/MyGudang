@@ -37,19 +37,20 @@ public class Barang extends Models {
         }
         return data;
     }
-    
-    public void deleteBarang(int id){
+
+    public void deleteBarang(int id) {
         String sql = "DELETE FROM barang WHERE id_barang=?";
         try {
             Connection koneksi = super.getKoneksi();
             PreparedStatement st = koneksi.prepareCall(sql);
             st.setInt(1, id);
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException err) {
+            err.printStackTrace();
         }
     }
-    
-    public void insertBarang(String nama, int jumlah, int idSupplier){
+
+    public void insertBarang(String nama, int jumlah, int idSupplier) {
         String sql = "INSERT INTO barang(nama, jumlah, id_supplier) VALUES (?, ?, ?)";
         try {
             Connection koneksi = super.getKoneksi();
@@ -61,7 +62,59 @@ public class Barang extends Models {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
     
+     public int getIdBarang(String name) {
+        String sql = "SELECT id_barang FROM barang WHERE nama = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+            return 0;
+    }
+
+    public int getIdSupplier(int idBarang) {
+        String sql = "SELECT id_supplier FROM barang WHERE id_barang = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, idBarang);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+            return 0;
+    }
+    
+    public Object[][] getList() {
+        Object[][] data = new Object[super.getTotalData()][2];
+        String sql = "SELECT id_barang, nama FROM " + super.table + " ORDER BY nama";
+        int totalData = super.getTotalData();
+        try {
+            Connection koneksi = super.getKoneksi();
+            Statement st = koneksi.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            int nomor = 0;
+            while (rs.next()) {
+                data[nomor][0] = rs.getInt(1);
+                data[nomor][1] = rs.getString(2);
+                nomor++;
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        return data;
     }
 
     public Object[] getDataBarangById(int id) {

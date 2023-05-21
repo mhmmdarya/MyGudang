@@ -13,12 +13,8 @@ import tools.Converter;
 public class Main {
 
     public static void main(String[] args) {
-        Petugas db = new Petugas("petugas");
-        Barang br = new Barang("barang");
-//        br.deleteBarang(117);
-//        ArrayList<Object[]> data = br.findBarangByName("a");
-//        Object[][] datas = Converter.convertArray(data);
-//        System.out.println(Arrays.deepToString(datas));
+        BarangMasuk br = new BarangMasuk("barang_masuk");
+        System.out.println(Arrays.deepToString(br.selectAll()));
     }
 
 }

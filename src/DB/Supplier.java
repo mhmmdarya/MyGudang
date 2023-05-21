@@ -36,7 +36,6 @@ public class Supplier extends Models {
     }
     
     public Object[][] getList() {
-//        HashMap<Integer, String> data = new HashMap<Integer, String>();
         Object[][] data = new Object[super.getTotalData()][2];
         String sql = "SELECT id_supplier, nama FROM " + super.table;
         int totalData = super.getTotalData();
@@ -46,7 +45,6 @@ public class Supplier extends Models {
             ResultSet rs = st.executeQuery(sql);
             int nomor = 0;
             while (rs.next()) {
-                //                data.put(rs.getInt(1), rs.getString(2));
                 data[nomor][0] = rs.getInt(1);
                 data[nomor][1] = rs.getString(2);
                 nomor++;

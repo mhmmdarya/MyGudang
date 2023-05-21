@@ -26,7 +26,7 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         setLocationRelativeTo(null);
-
+        setLabelTotal();
         // set icon
         ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
         setIconImage(icon.getImage());
@@ -34,14 +34,17 @@ public class Dashboard extends javax.swing.JFrame {
 //        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
         labelNama.setText(nama);
         labelRole.setText(role);
-        idTxt.setText("" + Session.getId());
         btnHapus.setVisible(false);
-        labelJmlBarang.setText("" + barang.getTotalData());
-        labelTransaksi.setText("" + barangKeluar.getTotalData());
         btnPetugas.setVisible(false);
         if (role.equalsIgnoreCase("admin")) {
             btnPetugas.setVisible(true);
         }
+    }
+    
+    private void setLabelTotal(){
+        totalBarang.setText("" + barang.getTotalData());
+        totalBarangMasuk.setText("" + barangMasuk.getTotalData());
+        totalBarangKeluar.setText("0");
     }
 
     /**
@@ -56,25 +59,28 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         panelBarang = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        labelJmlBarang = new javax.swing.JLabel();
+        totalBarang = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
         panelBarang2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        labelTransaksi1 = new javax.swing.JLabel();
+        totalBarangMasuk = new javax.swing.JLabel();
         panelBarang1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        labelTransaksi = new javax.swing.JLabel();
+        totalBarangKeluar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
         labelNama = new javax.swing.JLabel();
         labelRole = new javax.swing.JLabel();
-        idTxt = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         findBarang = new javax.swing.JTextField();
         btnPetugas = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnHapus = new javax.swing.JButton();
+        btnHapus1 = new javax.swing.JButton();
+        btnBarangMasuk = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -94,11 +100,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
-        labelJmlBarang.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        labelJmlBarang.setForeground(new java.awt.Color(255, 255, 255));
-        labelJmlBarang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelJmlBarang.setText("0");
-        panelBarang.add(labelJmlBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
+        totalBarang.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        totalBarang.setForeground(new java.awt.Color(255, 255, 255));
+        totalBarang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalBarang.setText("0");
+        panelBarang.add(totalBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
         jPanel1.add(panelBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 210, 80));
 
@@ -126,11 +132,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
-        labelTransaksi1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        labelTransaksi1.setForeground(new java.awt.Color(255, 255, 255));
-        labelTransaksi1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTransaksi1.setText("0");
-        panelBarang2.add(labelTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
+        totalBarangMasuk.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        totalBarangMasuk.setForeground(new java.awt.Color(255, 255, 255));
+        totalBarangMasuk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalBarangMasuk.setText("0");
+        panelBarang2.add(totalBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
         jPanel1.add(panelBarang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 210, 80));
 
@@ -145,11 +151,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
-        labelTransaksi.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        labelTransaksi.setForeground(new java.awt.Color(255, 255, 255));
-        labelTransaksi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTransaksi.setText("0");
-        panelBarang1.add(labelTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
+        totalBarangKeluar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        totalBarangKeluar.setForeground(new java.awt.Color(255, 255, 255));
+        totalBarangKeluar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalBarangKeluar.setText("0");
+        panelBarang1.add(totalBarangKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, -1));
 
         jPanel1.add(panelBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 80));
 
@@ -175,9 +181,6 @@ public class Dashboard extends javax.swing.JFrame {
         labelRole.setText("role");
         jPanel2.add(labelRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 590, 30));
 
-        idTxt.setText("jLabel5");
-        jPanel2.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 40, -1));
-
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 80));
 
         jButton1.setText("Tambah Barang Baru");
@@ -194,7 +197,7 @@ public class Dashboard extends javax.swing.JFrame {
                 findBarangKeyTyped(evt);
             }
         });
-        jPanel1.add(findBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 192, 270, 30));
+        jPanel1.add(findBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 192, 260, 30));
 
         btnPetugas.setText("Daftar Petugas");
         btnPetugas.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +205,7 @@ public class Dashboard extends javax.swing.JFrame {
                 btnPetugasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 120, 30));
+        jPanel1.add(btnPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 110, 30));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/inventory-icon-vector-11 (3).png"))); // NOI18N
@@ -216,6 +219,33 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 140, 30));
+
+        btnHapus1.setText("Hapus Barang");
+        btnHapus1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapus1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 140, 30));
+
+        btnBarangMasuk.setText("Barang Masuk");
+        btnBarangMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarangMasukActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 190, 110, 30));
+
+        jButton3.setText("Barang Keluar");
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 110, 30));
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(855, 620, 120, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 670));
 
@@ -248,7 +278,8 @@ public class Dashboard extends javax.swing.JFrame {
         tabelBarang.setModel(new DefaultTableModel(datas, listBarang));
     }//GEN-LAST:event_findBarangKeyTyped
 
-    private void refresh(){
+    public void refresh(){
+        totalBarang.setText("" + barang.getTotalData());
         tabelBarang.setModel(new DefaultTableModel(barang.getDataBarang(), listBarang));
     }
     
@@ -268,6 +299,20 @@ public class Dashboard extends javax.swing.JFrame {
             refresh();
         }
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapus1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHapus1ActionPerformed
+
+    private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
+        // TODO add your handling code here:
+        new views.transaksi.BarangMasuk().setVisible(true);
+    }//GEN-LAST:event_btnBarangMasukActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,15 +357,19 @@ public class Dashboard extends javax.swing.JFrame {
     private String role = Session.getRole();
 //    private String role = "Admin";
     private Barang barang = new Barang("barang");
+    private BarangMasuk barangMasuk = new BarangMasuk("barang_masuk");
     private BarangKeluar barangKeluar = new BarangKeluar("barang_keluar");
     private String[] listBarang = {"ID Barang", "Nama Barang", "Jumlah", "Nama Supplier"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBarangMasuk;
     private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnHapus1;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPetugas;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JTextField findBarang;
-    private javax.swing.JLabel idTxt;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -328,14 +377,14 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelJmlBarang;
     private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelRole;
-    private javax.swing.JLabel labelTransaksi;
-    private javax.swing.JLabel labelTransaksi1;
     private javax.swing.JPanel panelBarang;
     private javax.swing.JPanel panelBarang1;
     private javax.swing.JPanel panelBarang2;
     private javax.swing.JTable tabelBarang;
+    private javax.swing.JLabel totalBarang;
+    private javax.swing.JLabel totalBarangKeluar;
+    private javax.swing.JLabel totalBarangMasuk;
     // End of variables declaration//GEN-END:variables
 }
