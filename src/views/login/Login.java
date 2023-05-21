@@ -9,7 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 import tools.Session;
 import tools.Security;
-import views.barang.Dashboard;
+import view.dashboard.Dashboard;
 
 /**
  *

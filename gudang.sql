@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2023 at 11:03 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: May 22, 2023 at 01:39 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `barang` (
   `nama` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `id_supplier` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barang`
@@ -102,7 +102,7 @@ CREATE TABLE `barang_keluar` (
   `jumlah` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Triggers `barang_keluar`
@@ -126,7 +126,7 @@ CREATE TABLE `barang_masuk` (
   `id_supplier` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Triggers `barang_masuk`
@@ -151,7 +151,7 @@ CREATE TABLE `petugas` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('Admin','Petugas') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `petugas`
@@ -159,7 +159,8 @@ CREATE TABLE `petugas` (
 
 INSERT INTO `petugas` (`id_petugas`, `nama`, `jenis_kelamin`, `email`, `username`, `password`, `role`) VALUES
 (1, 'Muhammad Arya', 'Pria', 'muhammad@gmail.com', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin'),
-(2, 'Muhammad Imam', 'Pria', 'imam@gmail.com', 'imam', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Petugas');
+(2, 'Muhammad Imam', 'Pria', 'imam@gmail.com', 'imam', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Petugas'),
+(3, 'Yahya Alghazali', 'Pria', 'yahya@gmail.com', 'yahya', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -172,7 +173,7 @@ CREATE TABLE `supplier` (
   `nama` varchar(100) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `no_telp` char(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `supplier`
@@ -266,7 +267,7 @@ ALTER TABLE `barang_masuk`
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `supplier`
