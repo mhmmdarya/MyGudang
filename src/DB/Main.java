@@ -13,8 +13,8 @@ import tools.Converter;
 public class Main {
 
     public static void main(String[] args) {
-        BarangMasuk br = new BarangMasuk("barang_masuk");
-        System.out.println(Arrays.deepToString(br.selectAll()));
+        Barang br = new Barang("barang");
+        br.editNamaBarang(121, "Kodok");
     }
 
 }

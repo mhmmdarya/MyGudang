@@ -49,6 +49,19 @@ public class Barang extends Models {
             err.printStackTrace();
         }
     }
+    
+    public void editNamaBarang(int id, String nama){
+        String sql = "UPDATE barang SET nama = ? WHERE id_barang = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, nama);
+            st.setInt(2, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void insertBarang(String nama, int jumlah, int idSupplier) {
         String sql = "INSERT INTO barang(nama, jumlah, id_supplier) VALUES (?, ?, ?)";

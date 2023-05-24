@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.dashboard;
+package views.dashboard;
 
 import views.login.Login;
 import DB.*;
@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import tools.Session;
 import tools.Converter;
-import view.tambahBarang.TambahBarang;
+import views.barang.TambahBarang;
 
 /**
  *
@@ -36,13 +36,12 @@ public class Dashboard extends javax.swing.JFrame {
         labelNama.setText(nama);
         labelRole.setText(role);
         btnHapus.setVisible(false);
+        btnEdit.setVisible(false);
         tampilanPetugas.setVisible(false);
-        
-        
-        jTable1.setModel(new DefaultTableModel(petugasModel.getAllData(), list));
+        tabelPetugas.setModel(new DefaultTableModel(petugasModel.getAllData(), listPetugas));
     }
     
-    private void setLabelTotal(){
+    private void setLabelTotal() {
         totalBarang.setText("" + barang.getTotalData());
         totalBarangMasuk.setText("" + barangMasuk.getTotalData());
         totalBarangKeluar.setText("0");
@@ -83,19 +82,20 @@ public class Dashboard extends javax.swing.JFrame {
         findBarang = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnHapus = new javax.swing.JButton();
-        btnHapus1 = new javax.swing.JButton();
         btnBarangMasuk = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         tampilanPetugas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelPetugas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAddPetugas = new javax.swing.JButton();
+        btnHapusPetugas = new javax.swing.JButton();
         btnLogout1 = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
 
@@ -123,7 +123,7 @@ public class Dashboard extends javax.swing.JFrame {
         panelUser.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 230, 20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/home.png"))); // NOI18N
-        panelUser.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 270, 390));
+        panelUser.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 270, 430));
 
         petugasKlik.setFont(new java.awt.Font("Stencil", 0, 14)); // NOI18N
         petugasKlik.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,15 +268,7 @@ public class Dashboard extends javax.swing.JFrame {
                 btnHapusActionPerformed(evt);
             }
         });
-        tampilanBarang.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 140, 30));
-
-        btnHapus1.setText("Hapus Barang");
-        btnHapus1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapus1ActionPerformed(evt);
-            }
-        });
-        tampilanBarang.add(btnHapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 140, 30));
+        tampilanBarang.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 110, 30));
 
         btnBarangMasuk.setText("Barang Masuk");
         btnBarangMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -284,10 +276,10 @@ public class Dashboard extends javax.swing.JFrame {
                 btnBarangMasukActionPerformed(evt);
             }
         });
-        tampilanBarang.add(btnBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 110, 30));
+        tampilanBarang.add(btnBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 110, 30));
 
         jButton3.setText("Barang Keluar");
-        tampilanBarang.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 110, 30));
+        tampilanBarang.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 30));
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -316,13 +308,21 @@ public class Dashboard extends javax.swing.JFrame {
         });
         tampilanBarang.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, 30));
 
+        btnEdit.setText("Edit Nama Barang");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        tampilanBarang.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 130, 30));
+
         jLayeredPane1.add(tampilanBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 670));
 
         tampilanPetugas.setBackground(new java.awt.Color(83, 113, 136));
         tampilanPetugas.setPreferredSize(new java.awt.Dimension(1010, 670));
         tampilanPetugas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPetugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -333,7 +333,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tabelPetugas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelPetugasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabelPetugas);
 
         tampilanPetugas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 840, 400));
 
@@ -347,11 +352,21 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/6345962.png"))); // NOI18N
         tampilanPetugas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        jButton2.setText("Tambah");
-        tampilanPetugas.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 120, -1));
+        btnAddPetugas.setText("Tambah");
+        btnAddPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPetugasActionPerformed(evt);
+            }
+        });
+        tampilanPetugas.add(btnAddPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 120, -1));
 
-        jButton4.setText("Hapus");
-        tampilanPetugas.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 190, 120, -1));
+        btnHapusPetugas.setText("Hapus");
+        btnHapusPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusPetugasActionPerformed(evt);
+            }
+        });
+        tampilanPetugas.add(btnHapusPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 190, 120, -1));
 
         btnLogout1.setText("Logout");
         btnLogout1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -371,6 +386,14 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tampilanPetugas.add(btnLogout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, 30));
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+        tampilanPetugas.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 630, 130, -1));
 
         jLayeredPane1.add(tampilanPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 670));
 
@@ -394,7 +417,9 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         int nomor = tabelBarang.getSelectedRow();
         this.idBarang = Integer.parseInt(tabelBarang.getValueAt(nomor, 0).toString());
+        this.namaBarang = tabelBarang.getValueAt(nomor, 1).toString();
         btnHapus.setVisible(true);
+        btnEdit.setVisible(true);
     }//GEN-LAST:event_tabelBarangMouseClicked
 
     private void findBarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_findBarangKeyTyped
@@ -403,27 +428,16 @@ public class Dashboard extends javax.swing.JFrame {
         Object[][] datas = Converter.convertArray(barang.findBarangByName(findName));
         tabelBarang.setModel(new DefaultTableModel(datas, listBarang));
     }//GEN-LAST:event_findBarangKeyTyped
-
-    public void refresh(){
+    
+    public void refresh() {
         totalBarang.setText("" + barang.getTotalData());
         tabelBarang.setModel(new DefaultTableModel(barang.getDataBarang(), listBarang));
+        tabelPetugas.setModel(new DefaultTableModel(petugasModel.getAllData(), listPetugas));
+        btnHapus.setVisible(false);
+        btnEdit.setVisible(false);
+        this.idBarang = 0;
+        this.namaBarang = "";
     }
-    
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus data?", "WARNING", JOptionPane.WARNING_MESSAGE);
-        if (option == JOptionPane.OK_OPTION) {
-            barang.deleteBarang(idBarang);
-            JOptionPane.showMessageDialog(null, "Berhasil menghapus data barang", "Pesan", JOptionPane.INFORMATION_MESSAGE);
-            refresh();
-        } else {
-            refresh();
-        }
-    }//GEN-LAST:event_btnHapusActionPerformed
-
-    private void btnHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapus1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHapus1ActionPerformed
 
     private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
         // TODO add your handling code here:
@@ -436,18 +450,17 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshActionPerformed
     
 
-    
     private void petugasKlikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_petugasKlikMouseClicked
         // TODO add your handling code here:
         if (role.equalsIgnoreCase("petugas")) {
             JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Dapat Mengakses Ini", "Pesan", JOptionPane.WARNING_MESSAGE);
             tampilanPetugas.setVisible(false);
             tampilanBarang.setVisible(true);
-        }else{
+        } else {
             tampilanPetugas.setVisible(true);
             tampilanBarang.setVisible(false);
         }
-            
+
     }//GEN-LAST:event_petugasKlikMouseClicked
 
     private void barangKlikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barangKlikMouseClicked
@@ -520,6 +533,66 @@ public class Dashboard extends javax.swing.JFrame {
         btnLogout1.setBackground(Color.white);
     }//GEN-LAST:event_btnLogout1MouseExited
 
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        if (this.idBarang == 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih barang yang ingin dihapus terlebih dahulu", "Pesan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int option = JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus data?", "WARNING", JOptionPane.WARNING_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            barang.deleteBarang(idBarang);
+            JOptionPane.showMessageDialog(null, "Berhasil menghapus data barang", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            refresh();
+        } else {
+            refresh();
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        if (this.idBarang == 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih barang yang ingin diedit terlebih dahulu", "Pesan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String editNama = JOptionPane.showInputDialog(null, "Nama Barang", this.namaBarang);
+            barang.editNamaBarang(this.idBarang, editNama);
+            JOptionPane.showMessageDialog(null, "Berhasil mengedit nama barang", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            refresh();
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void btnAddPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPetugasActionPerformed
+        // TODO add your handling code here:
+        new views.petugas.TambahPetugas().setVisible(true);
+    }//GEN-LAST:event_btnAddPetugasActionPerformed
+
+    private void btnHapusPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusPetugasActionPerformed
+        // TODO add your handling code here:
+        if (idPetugas == 0) {
+            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus", "Pesan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int option = JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus data?", "Warning", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            petugasModel.deletePetugas(idPetugas);
+            JOptionPane.showMessageDialog(null, "Berhasil menghapus data petugas", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            refresh();
+        }
+    }//GEN-LAST:event_btnHapusPetugasActionPerformed
+
+    private void tabelPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPetugasMouseClicked
+        // TODO add your handling code here:
+        int nomor = tabelPetugas.getSelectedRow();
+        this.idPetugas = Integer.parseInt((String) tabelPetugas.getValueAt(nomor, 0));
+        
+        
+    }//GEN-LAST:event_tabelPetugasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -557,8 +630,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private String namaBarang = "";
     private int idBarang = 0;
+    private int idPetugas = 0;
     private String nama = Session.getName();
     private String role = Session.getRole();
 //    private String role = "Admin";
@@ -566,24 +641,24 @@ public class Dashboard extends javax.swing.JFrame {
     private BarangMasuk barangMasuk = new BarangMasuk("barang_masuk");
     private BarangKeluar barangKeluar = new BarangKeluar("barang_keluar");
     private String[] listBarang = {"ID Barang", "Nama Barang", "Jumlah", "Nama Supplier"};
-    
+
     //Deklarasi Petugas
     private Petugas petugasModel = new Petugas("petugas");
-    private String[] list = {"ID", "Nama", "Jenis Kelamin", "Email", "Username", "Role"};
-    
+    private String[] listPetugas = {"ID", "Nama", "Jenis Kelamin", "Email", "Username", "Role"};
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel barangKlik;
+    private javax.swing.JButton btnAddPetugas;
     private javax.swing.JButton btnBarangMasuk;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
-    private javax.swing.JButton btnHapus1;
+    private javax.swing.JButton btnHapusPetugas;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnLogout1;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTextField findBarang;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -598,7 +673,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelRole;
@@ -607,7 +681,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel panelBarang2;
     private javax.swing.JPanel panelUser;
     private javax.swing.JLabel petugasKlik;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JTable tabelBarang;
+    private javax.swing.JTable tabelPetugas;
     private javax.swing.JPanel tampilanBarang;
     private javax.swing.JPanel tampilanPetugas;
     private javax.swing.JLabel totalBarang;

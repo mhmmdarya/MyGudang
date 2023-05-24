@@ -58,6 +58,35 @@ public class Petugas extends Models {
         }
         return hasil;
     }
+    
+    public void deletePetugas(int id) {
+        String sql = "DELETE FROM petugas WHERE id_petugas=?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+    
+    public void insertPetugas(String[] data){
+        String sql = "INSERT INTO petugas(nama, jenis_kelamin, email, username, password, role) VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, data[0]);
+            st.setString(2, data[1]);
+            st.setString(3, data[2]);
+            st.setString(4, data[3]);
+            st.setString(5, data[4]);
+            st.setString(6, data[5]);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void updatePassword(String username, String password) {
         String sql = "UPDATE petugas SET password = ? WHERE username = ?";
@@ -80,6 +109,21 @@ public class Petugas extends Models {
             PreparedStatement st = koneksi.prepareCall(sql);
             st.setString(1, username);
             st.setString(2, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean checkUser(String username) {
+        String sql = "SELECT * FROM petugas WHERE username=?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, username);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return true;

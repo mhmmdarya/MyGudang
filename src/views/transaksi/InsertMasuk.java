@@ -9,7 +9,7 @@ import DB.Supplier;
 import javax.swing.JOptionPane;
 import tools.Converter;
 import tools.Session;
-import view.dashboard.Dashboard;
+import views.dashboard.Dashboard;
 
 /**
  *
