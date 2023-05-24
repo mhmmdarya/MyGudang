@@ -5,6 +5,7 @@
 package DB;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -40,6 +41,35 @@ public class BarangMasuk extends Models {
                 nomor++;
             }
         } catch (SQLException e) {
+        }
+        return data;
+    }
+
+    public ArrayList<Object[]> filter(String tanggalAwal, String tanggalAkhir) {
+        ArrayList<Object[]> data = new ArrayList<Object[]>();
+        String sql = "SELECT barang_masuk.id_transaksi, barang_masuk.tanggal_masuk, barang_masuk.jumlah, barang.nama AS nama_barang, supplier.nama AS nama_supplier, petugas.nama AS nama_petugas\n"
+                + "FROM barang_masuk\n"
+                + "INNER JOIN barang ON barang_masuk.id_barang = barang.id_barang\n"
+                + "INNER JOIN petugas ON barang_masuk.id_petugas = petugas.id_petugas\n"
+                + "INNER JOIN supplier ON barang_masuk.id_supplier = supplier.id_supplier\n"
+                + "WHERE barang_masuk.tanggal_masuk BETWEEN ? AND ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, tanggalAwal);
+            st.setString(2, tanggalAkhir);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String tanggal = rs.getString(2);
+                int jml = rs.getInt(3);
+                String namaBarang = rs.getString(4);
+                String namaSupplier = rs.getString(5);
+                String namaPetugas = rs.getString(6);
+                data.add(new Object[]{id, tanggal, jml, namaBarang, namaSupplier, namaPetugas});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return data;
     }

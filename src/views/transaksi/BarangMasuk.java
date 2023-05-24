@@ -5,6 +5,7 @@
 package views.transaksi;
 
 import javax.swing.table.DefaultTableModel;
+import tools.Converter;
 
 /**
  *
@@ -20,9 +21,9 @@ public class BarangMasuk extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTabel();
     }
-    
-    private void setTabel(){
-        jTable1.setModel(new DefaultTableModel(barangMasukModel.selectAll(), listTable));
+
+    private void setTabel() {
+        tabelMasuk.setModel(new DefaultTableModel(barangMasukModel.selectAll(), listTable));
     }
 
     /**
@@ -36,14 +37,17 @@ public class BarangMasuk extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelMasuk = new javax.swing.JTable();
         btnTambah = new javax.swing.JButton();
+        tglAwal = new com.toedter.calendar.JDateChooser();
+        tglAkhir = new com.toedter.calendar.JDateChooser();
+        filterData = new javax.swing.JButton();
 
         setTitle("DAFTAR BARANG MASUK");
 
         jPanel1.setBackground(new java.awt.Color(83, 113, 136));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelMasuk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,12 +58,19 @@ public class BarangMasuk extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelMasuk);
 
         btnTambah.setText("Tambah");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTambahActionPerformed(evt);
+            }
+        });
+
+        filterData.setText("Filter");
+        filterData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterDataActionPerformed(evt);
             }
         });
 
@@ -69,8 +80,15 @@ public class BarangMasuk extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(tglAwal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tglAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(filterData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -78,7 +96,11 @@ public class BarangMasuk extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(btnTambah)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTambah)
+                    .addComponent(tglAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -102,6 +124,22 @@ public class BarangMasuk extends javax.swing.JFrame {
         // TODO add your handling code here:
         new InsertMasuk().setVisible(true);
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void filterDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterDataActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (tglAwal == null || tglAkhir == null) {
+            setTabel();
+        } else {
+            String awal = Converter.formatTanggal(tglAwal.getDate());
+            String akhir = Converter.formatTanggal(tglAkhir.getDate());
+            Object[][] data = Converter.convertArray(barangMasukModel.filter(awal, akhir));
+            tabelMasuk.setModel(new DefaultTableModel(data, listTable));
+        }
+        } catch (Exception e) {
+            setTabel();
+        }
+    }//GEN-LAST:event_filterDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,13 +175,16 @@ public class BarangMasuk extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private DB.BarangMasuk barangMasukModel = new DB.BarangMasuk("barang_masuk");
     private String[] listTable = {"ID Transaksi", "Tanggal Masuk", "Jumlah", "Nama Barang", "Supplier", "Nama Petugas"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTambah;
+    private javax.swing.JButton filterData;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelMasuk;
+    private com.toedter.calendar.JDateChooser tglAkhir;
+    private com.toedter.calendar.JDateChooser tglAwal;
     // End of variables declaration//GEN-END:variables
 }
