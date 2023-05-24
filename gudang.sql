@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 01:39 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: May 24, 2023 at 07:00 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,63 +32,15 @@ CREATE TABLE `barang` (
   `nama` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `id_supplier` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id_barang`, `nama`, `jumlah`, `id_supplier`) VALUES
-(1, 'Grape', 51, 18),
-(2, 'ultra-Rambutan', 49, 7),
-(3, 'Kiwi pro', 96, 15),
-(4, 'Adple plus', 20, 17),
-(5, 'Cherry mini', 49, 11),
-(6, 'Rambutan', 34, 3),
-(7, 'Raspberry', 36, 13),
-(8, 'Strawbnrry', 20, 2),
-(9, 'Appce core', 63, 4),
-(10, 'Grape', 67, 5),
-(11, 'Pvuots', 76, 18),
-(12, 'ipple', 18, 15),
-(13, 'Cherry premium', 11, 7),
-(14, 'Orange', 91, 13),
-(15, 'Chenry core', 65, 2),
-(16, 'Cheery', 56, 10),
-(17, 'ultra-Orange', 39, 18),
-(18, 'Raspbexry air', 11, 4),
-(19, 'Raspberry', 67, 13),
-(20, 'Orange mini', 29, 2),
-(21, 'Strawberry', 68, 8),
-(22, 'Rambftan', 26, 16),
-(23, 'Ktwi mini', 39, 16),
-(24, 'Raspberry se', 18, 7),
-(25, 'wiwi core', 91, 6),
-(26, 'Mango elite', 71, 6),
-(27, 'Rambugan', 83, 14),
-(28, 'Pluots', 31, 3),
-(29, 'Cherry', 58, 19),
-(30, 'Kiwi', 46, 14),
-(31, 'xKiwi', 63, 11),
-(32, 'Cherry', 32, 10),
-(33, 'Cmerry mini', 35, 11),
-(34, 'Rambutan se', 23, 3),
-(35, 'Rambytan', 29, 20),
-(36, 'Apple', 45, 2),
-(37, 'Cherry mini', 81, 11),
-(38, 'Raspberry', 18, 10),
-(39, 'Manyo', 92, 4),
-(40, 'Rambutan core', 15, 13),
-(41, 'opple', 36, 16),
-(42, 'Kowi', 51, 18),
-(43, 'Kawi mini', 100, 13),
-(44, 'ultra-Orange', 44, 9),
-(45, 'xMango', 42, 6),
-(46, 'Cwerry', 37, 4),
-(47, 'iStrawberry', 63, 3),
-(48, 'Apple elite', 94, 19),
-(49, 'ultra-Avple', 92, 5),
-(50, 'Gyape se', 65, 20);
+(119, 'Sabun Lifeboy', 55, 1),
+(120, 'Gembok', 7, 4);
 
 -- --------------------------------------------------------
 
@@ -102,7 +54,17 @@ CREATE TABLE `barang_keluar` (
   `jumlah` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `barang_keluar`
+--
+
+INSERT INTO `barang_keluar` (`id_transaksi`, `tanggal_keluar`, `jumlah`, `id_barang`, `id_petugas`) VALUES
+(2, '2023-05-15', 2, 119, 1),
+(3, '2023-05-01', 20, 119, 1),
+(7, '2023-05-01', 19, 120, 1),
+(8, '2023-05-24', 100, 119, 1);
 
 --
 -- Triggers `barang_keluar`
@@ -126,7 +88,27 @@ CREATE TABLE `barang_masuk` (
   `id_supplier` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `barang_masuk`
+--
+
+INSERT INTO `barang_masuk` (`id_transaksi`, `jumlah`, `tanggal_masuk`, `id_supplier`, `id_petugas`, `id_barang`) VALUES
+(3, 5, '2023-05-01', 1, 1, 119),
+(4, 3, '2023-05-17', 1, 1, 119),
+(5, 10, '2023-05-01', 1, 1, 119),
+(6, 17, '2023-01-20', 6, 1, 119),
+(8, 11, '2023-01-30', 10, 2, 119),
+(10, 26, '2023-05-02', 15, 1, 119),
+(12, 23, '2023-03-10', 1, 2, 120),
+(14, 30, '2023-03-03', 3, 1, 119),
+(16, 22, '2023-04-07', 4, 1, 119),
+(17, 12, '2023-01-11', 13, 2, 119),
+(19, 20, '2023-05-02', 16, 1, 120),
+(20, 19, '2023-01-21', 20, 2, 119),
+(22, 6, '2023-05-24', 4, 1, 120),
+(23, 10, '2023-05-24', 1, 1, 119);
 
 --
 -- Triggers `barang_masuk`
@@ -151,7 +133,7 @@ CREATE TABLE `petugas` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('Admin','Petugas') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `petugas`
@@ -160,7 +142,7 @@ CREATE TABLE `petugas` (
 INSERT INTO `petugas` (`id_petugas`, `nama`, `jenis_kelamin`, `email`, `username`, `password`, `role`) VALUES
 (1, 'Muhammad Arya', 'Pria', 'muhammad@gmail.com', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin'),
 (2, 'Muhammad Imam', 'Pria', 'imam@gmail.com', 'imam', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Petugas'),
-(3, 'Yahya Alghazali', 'Pria', 'yahya@gmail.com', 'yahya', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin');
+(13, 'Yahya', 'Pria', 'yahya@gmail.com', 'yahya', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -173,33 +155,33 @@ CREATE TABLE `supplier` (
   `nama` varchar(100) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `no_telp` char(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `supplier`
 --
 
 INSERT INTO `supplier` (`id_supplier`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 'Alice Telecommunication Inc.', '19 Diplomacy Drive', '595363132220'),
-(2, 'Tucker\'s Toy LLC', '544 Canal Street', '699534090470'),
-(3, 'Coleman Brothers Inc.', '817 Rush Street', '140666464455'),
-(4, 'Marshall Logistic LLC', '991 Aigburth Rd, Aigburth', '715914707030'),
-(5, 'Carlos LLC', '531 Spring Gardens', '812787495196'),
-(6, 'Guzman\'s Food LLC', '962 1st Ave', '720252996174'),
-(7, 'Nancy Engineering Inc.', '365 East Alley', '208494738501'),
-(8, 'Nguyen Brothers Logistic Inc.', '492 Pollen Street', '349805446252'),
-(9, 'Mills Brothers Logistic Inc.', '502 Redfern St', '006560826605'),
-(10, 'Carl Trading LLC', '453 Trafalgar Square, Charing Cross', '971118271283'),
-(11, 'Harris Electronic Inc.', '973 39 William IV St, Charing Cross', '145950792366'),
-(12, 'Paul Consultants Inc.', '806 Hinckley Rd', '804584709471'),
-(13, 'Wanda Telecommunication Inc.', '784 1st Ave', '950666757186'),
-(14, 'Carolyn Technology Inc.', '23 Lower Temple Street', '432025760207'),
-(15, 'Christina LLC', '358 Lower Temple Street', '473809418764'),
-(16, 'Medina Brothers LLC', '372 Papworth Rd, Trumpington', '027715197963'),
-(17, 'Peggy Electronic LLC', '172 Fifth Avenue', '149867818973'),
-(18, 'Turner\'s LLC', '306 Osney Mead', '020308877708'),
-(19, 'Timothy Inc.', '574 Wooster Street', '642658422831'),
-(20, 'Anthony Engineering Inc.', '205 Flatbush Ave', '094079016368');
+(1, 'Rita Telecommunication Inc.', '572 Fifth Avenue', '248792022974'),
+(2, 'West Brothers LLC', '97 Diplomacy Drive', '992920667481'),
+(3, 'Kim Electronic Inc.', '823 Lark Street', '765247922354'),
+(4, 'Guzman\'s Pharmaceutical Inc.', '31 Maddox Street', '141010825624'),
+(5, 'Owens\'s Electronic Inc.', '559 Central Avenue', '077545119178'),
+(6, 'Walter Software LLC', '315 Tremont Road', '473530766230'),
+(7, 'Gloria Inc.', '248 Edward Ave, Braunstone Town', '506540617633'),
+(8, 'Patel Network Systems LLC', '29 Pollen Street', '689574539283'),
+(9, 'Daniel Logistic Inc.', '800 Grape Street', '276383482659'),
+(10, 'Donald LLC', '813 Central Avenue', '332561435548'),
+(11, 'Anderson Brothers Electronic Inc.', '196 Flatbush Ave', '354183728018'),
+(12, 'Connie LLC', '673 Papworth Rd, Trumpington', '979586115459'),
+(13, 'Palmer Brothers Pharmaceutical Inc.', '197 Riverview Road', '459078872633'),
+(14, 'Jimmy Technology Inc.', '3 New Street', '090819003259'),
+(15, 'Butler Inc.', '972 Wooster Street', '045497068851'),
+(16, 'Chad Consultants LLC', '593 East Alley', '763123320150'),
+(17, 'Hall Communications LLC', '991 Wooster Street', '377743238440'),
+(18, 'Herrera\'s Inc.', '166 Sky Way', '690728983332'),
+(19, 'Frances Technology LLC', '985 New Street', '388033219650'),
+(20, 'Thomas Telecommunication LLC', '540 Abingdon Rd, Cumnor', '225767028215');
 
 --
 -- Indexes for dumped tables
@@ -210,7 +192,7 @@ INSERT INTO `supplier` (`id_supplier`, `nama`, `alamat`, `no_telp`) VALUES
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
-  ADD KEY `id_supplier` (`id_supplier`);
+  ADD KEY `barang_supp` (`id_supplier`);
 
 --
 -- Indexes for table `barang_keluar`
@@ -218,7 +200,7 @@ ALTER TABLE `barang`
 ALTER TABLE `barang_keluar`
   ADD PRIMARY KEY (`id_transaksi`),
   ADD KEY `id_barang` (`id_barang`,`id_petugas`),
-  ADD KEY `id_petugas` (`id_petugas`);
+  ADD KEY `barang_keluar_ibfk_1` (`id_petugas`);
 
 --
 -- Indexes for table `barang_masuk`
@@ -226,8 +208,8 @@ ALTER TABLE `barang_keluar`
 ALTER TABLE `barang_masuk`
   ADD PRIMARY KEY (`id_transaksi`),
   ADD KEY `id_supplier` (`id_supplier`,`id_petugas`,`id_barang`),
-  ADD KEY `id_petugas` (`id_petugas`),
-  ADD KEY `id_barang` (`id_barang`);
+  ADD KEY `barang_masuk_ibfk_2` (`id_barang`),
+  ADD KEY `barang_masuk_ibfk_1` (`id_petugas`);
 
 --
 -- Indexes for table `petugas`
@@ -249,25 +231,25 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -283,22 +265,22 @@ ALTER TABLE `supplier`
 -- Constraints for table `barang`
 --
 ALTER TABLE `barang`
-  ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`);
+  ADD CONSTRAINT `barang_supp` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  ADD CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`),
-  ADD CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
+  ADD CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  ADD CONSTRAINT `barang_masuk_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`),
-  ADD CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`),
-  ADD CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`);
+  ADD CONSTRAINT `barang_masuk_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
