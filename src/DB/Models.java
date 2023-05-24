@@ -68,7 +68,7 @@ public class Models {
     }
 
 
-    protected Object[][] selectAll() {
+    public Object[][] selectAll() {
         String QUERY = "SELECT * FROM " + table;
         int totalData = this.getTotalData();
         int totalColumn = this.getTotalColumn();

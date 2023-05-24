@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import tools.Session;
 import tools.Converter;
 import views.barang.TambahBarang;
+import views.transaksi.TransaksiKeluar;
 
 /**
  *
@@ -32,19 +33,23 @@ public class Dashboard extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
         setIconImage(icon.getImage());
 
-//        JOptionPane.showMessageDialog(null, "Hallo " + nama, "Selamat Datang", JOptionPane.PLAIN_MESSAGE);
         labelNama.setText(nama);
         labelRole.setText(role);
         btnHapus.setVisible(false);
         btnEdit.setVisible(false);
         tampilanPetugas.setVisible(false);
         tabelPetugas.setModel(new DefaultTableModel(petugasModel.getAllData(), listPetugas));
+        setDataSupplier(supplierModel.selectAll());
+    }
+
+    private void setDataSupplier(Object[][] data){
+        tabelSupplier.setModel(new DefaultTableModel(data, this.listSupplier));
     }
     
     private void setLabelTotal() {
         totalBarang.setText("" + barang.getTotalData());
-        totalBarangMasuk.setText("" + barangMasuk.getTotalData());
-        totalBarangKeluar.setText("0");
+        totalBarangMasuk.setText("" + barangMasuk.getTotalDataToday());
+        totalBarangKeluar.setText("" + barangKeluar.getTotalDataToday());
     }
 
     /**
@@ -64,6 +69,7 @@ public class Dashboard extends javax.swing.JFrame {
         petugasKlik = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         barangKlik = new javax.swing.JLabel();
+        supplierKlik = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         tampilanBarang = new javax.swing.JPanel();
@@ -83,7 +89,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnHapus = new javax.swing.JButton();
         btnBarangMasuk = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnBarangKeluar = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
@@ -96,6 +102,9 @@ public class Dashboard extends javax.swing.JFrame {
         btnHapusPetugas = new javax.swing.JButton();
         btnLogout1 = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
+        tampilanSupplier = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelSupplier = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
 
@@ -160,6 +169,22 @@ public class Dashboard extends javax.swing.JFrame {
         });
         panelUser.add(barangKlik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
+        supplierKlik.setFont(new java.awt.Font("Stencil", 0, 14)); // NOI18N
+        supplierKlik.setForeground(new java.awt.Color(255, 255, 255));
+        supplierKlik.setText("Daftar SUPPLIER");
+        supplierKlik.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supplierKlikMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                supplierKlikMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                supplierKlikMouseExited(evt);
+            }
+        });
+        panelUser.add(supplierKlik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 20));
+
         getContentPane().add(panelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 650));
 
         jPanel4.setBackground(new java.awt.Color(83, 113, 136));
@@ -210,7 +235,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Transaksi Barang Masuk");
+        jLabel3.setText("Barang Masuk Hari Ini");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
@@ -229,7 +254,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Transaksi Barang Keluar");
+        jLabel2.setText("Barang Keluar Hari ini");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         panelBarang1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
 
@@ -278,8 +303,13 @@ public class Dashboard extends javax.swing.JFrame {
         });
         tampilanBarang.add(btnBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 110, 30));
 
-        jButton3.setText("Barang Keluar");
-        tampilanBarang.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 30));
+        btnBarangKeluar.setText("Barang Keluar");
+        btnBarangKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarangKeluarActionPerformed(evt);
+            }
+        });
+        tampilanBarang.add(btnBarangKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 30));
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -397,6 +427,27 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLayeredPane1.add(tampilanPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 670));
 
+        tampilanSupplier.setBackground(new java.awt.Color(83, 113, 136));
+        tampilanSupplier.setPreferredSize(new java.awt.Dimension(1010, 670));
+        tampilanSupplier.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabelSupplier.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tabelSupplier);
+
+        tampilanSupplier.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 230, 950, 380));
+
+        jLayeredPane1.add(tampilanSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 1030, 670));
 
         jPanel6.setBackground(new java.awt.Color(83, 113, 136));
@@ -428,7 +479,7 @@ public class Dashboard extends javax.swing.JFrame {
         Object[][] datas = Converter.convertArray(barang.findBarangByName(findName));
         tabelBarang.setModel(new DefaultTableModel(datas, listBarang));
     }//GEN-LAST:event_findBarangKeyTyped
-    
+
     public void refresh() {
         totalBarang.setText("" + barang.getTotalData());
         tabelBarang.setModel(new DefaultTableModel(barang.getDataBarang(), listBarang));
@@ -437,27 +488,30 @@ public class Dashboard extends javax.swing.JFrame {
         btnEdit.setVisible(false);
         this.idBarang = 0;
         this.namaBarang = "";
+        setLabelTotal();
     }
 
     private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
         // TODO add your handling code here:
-        new views.transaksi.BarangMasuk().setVisible(true);
+        new views.transaksi.TransaksiMasuk().setVisible(true);
     }//GEN-LAST:event_btnBarangMasukActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_btnRefreshActionPerformed
-    
+
 
     private void petugasKlikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_petugasKlikMouseClicked
         // TODO add your handling code here:
         if (role.equalsIgnoreCase("petugas")) {
             JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Dapat Mengakses Ini", "Pesan", JOptionPane.WARNING_MESSAGE);
             tampilanPetugas.setVisible(false);
+            tampilanSupplier.setVisible(false);
             tampilanBarang.setVisible(true);
         } else {
             tampilanPetugas.setVisible(true);
+            tampilanSupplier.setVisible(false);
             tampilanBarang.setVisible(false);
         }
 
@@ -589,9 +643,31 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         int nomor = tabelPetugas.getSelectedRow();
         this.idPetugas = Integer.parseInt((String) tabelPetugas.getValueAt(nomor, 0));
-        
-        
+
+
     }//GEN-LAST:event_tabelPetugasMouseClicked
+
+    private void btnBarangKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangKeluarActionPerformed
+        // TODO add your handling code here:
+        new TransaksiKeluar().setVisible(true);
+    }//GEN-LAST:event_btnBarangKeluarActionPerformed
+
+    private void supplierKlikMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierKlikMouseEntered
+        // TODO add your handling code here
+        supplierKlik.setForeground(Color.DARK_GRAY);
+    }//GEN-LAST:event_supplierKlikMouseEntered
+
+    private void supplierKlikMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierKlikMouseExited
+        // TODO add your handling code here:
+        supplierKlik.setForeground(Color.WHITE);
+    }//GEN-LAST:event_supplierKlikMouseExited
+
+    private void supplierKlikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierKlikMouseClicked
+        // TODO add your handling code here:
+        tampilanBarang.setVisible(false);
+        tampilanPetugas.setVisible(false);
+        tampilanSupplier.setVisible(true);
+    }//GEN-LAST:event_supplierKlikMouseClicked
 
     /**
      * @param args the command line arguments
@@ -630,7 +706,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private String namaBarang = "";
     private int idBarang = 0;
     private int idPetugas = 0;
@@ -646,9 +722,13 @@ public class Dashboard extends javax.swing.JFrame {
     private Petugas petugasModel = new Petugas("petugas");
     private String[] listPetugas = {"ID", "Nama", "Jenis Kelamin", "Email", "Username", "Role"};
 
+    //Deklarasi Supplier
+    private Supplier supplierModel = new Supplier("supplier");
+    private String[] listSupplier = {"ID", "Nama", "Alamat", "Nomor Telepon"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel barangKlik;
     private javax.swing.JButton btnAddPetugas;
+    private javax.swing.JButton btnBarangKeluar;
     private javax.swing.JButton btnBarangMasuk;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
@@ -658,7 +738,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JTextField findBarang;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -673,6 +752,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelRole;
@@ -682,10 +762,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel panelUser;
     private javax.swing.JLabel petugasKlik;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JLabel supplierKlik;
     private javax.swing.JTable tabelBarang;
     private javax.swing.JTable tabelPetugas;
+    private javax.swing.JTable tabelSupplier;
     private javax.swing.JPanel tampilanBarang;
     private javax.swing.JPanel tampilanPetugas;
+    private javax.swing.JPanel tampilanSupplier;
     private javax.swing.JLabel totalBarang;
     private javax.swing.JLabel totalBarangKeluar;
     private javax.swing.JLabel totalBarangMasuk;

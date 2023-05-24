@@ -6,6 +6,8 @@ package DB;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
+import tools.Converter;
 
 /**
  *
@@ -72,6 +74,23 @@ public class BarangMasuk extends Models {
             e.printStackTrace();
         }
         return data;
+    }
+    
+    public int getTotalDataToday(){
+        String sql = "SELECT COUNT(*) FROM barang_masuk WHERE tanggal_masuk = ?";
+        String today = Converter.formatTanggal(new Date());
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, today);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+            return 0;
     }
 
     public void insert(int idBarang, String tanggal, int jumlah, int idSupplier, int idPetugas) {
