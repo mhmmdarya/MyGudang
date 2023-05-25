@@ -35,6 +35,32 @@ public class Supplier extends Models {
         return 0;
     }
     
+    public void delete(int id){
+        String sql = "DELETE FROM supplier WHERE id_supplier=?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+    
+    public void insert(String[] data){
+        String sql = "INSERT INTO supplier(nama, alamat, no_telp) VALUES (?, ?, ?)";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, data[0]);
+            st.setString(2, data[1]);
+            st.setString(3, data[2]);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public Object[][] getList() {
         Object[][] data = new Object[super.getTotalData()][2];
         String sql = "SELECT id_supplier, nama FROM " + super.table;

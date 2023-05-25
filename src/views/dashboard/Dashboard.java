@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import tools.Session;
 import tools.Converter;
 import views.barang.TambahBarang;
+import views.supplier.TambahSupplier;
 import views.transaksi.TransaksiKeluar;
 
 /**
@@ -36,6 +37,7 @@ public class Dashboard extends javax.swing.JFrame {
         labelNama.setText(nama);
         labelRole.setText(role);
         btnHapus.setVisible(false);
+        btnHapusSupplier.setVisible(false);
         btnEdit.setVisible(false);
         tampilanPetugas.setVisible(false);
         tabelPetugas.setModel(new DefaultTableModel(petugasModel.getAllData(), listPetugas));
@@ -105,6 +107,9 @@ public class Dashboard extends javax.swing.JFrame {
         tampilanSupplier = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelSupplier = new javax.swing.JTable();
+        btnSuppBaru = new javax.swing.JButton();
+        btnRefreshSupp = new javax.swing.JButton();
+        btnHapusSupplier = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
 
@@ -442,9 +447,38 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelSupplierMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tabelSupplier);
 
         tampilanSupplier.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 230, 950, 380));
+
+        btnSuppBaru.setText("Tambah Data Supplier Baru");
+        btnSuppBaru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuppBaruActionPerformed(evt);
+            }
+        });
+        tampilanSupplier.add(btnSuppBaru, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 180, -1));
+
+        btnRefreshSupp.setText("Refresh");
+        btnRefreshSupp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshSuppActionPerformed(evt);
+            }
+        });
+        tampilanSupplier.add(btnRefreshSupp, new org.netbeans.lib.awtextra.AbsoluteConstraints(885, 620, 110, -1));
+
+        btnHapusSupplier.setText("Hapus");
+        btnHapusSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusSupplierActionPerformed(evt);
+            }
+        });
+        tampilanSupplier.add(btnHapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 110, -1));
 
         jLayeredPane1.add(tampilanSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -643,8 +677,6 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         int nomor = tabelPetugas.getSelectedRow();
         this.idPetugas = Integer.parseInt((String) tabelPetugas.getValueAt(nomor, 0));
-
-
     }//GEN-LAST:event_tabelPetugasMouseClicked
 
     private void btnBarangKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangKeluarActionPerformed
@@ -669,6 +701,38 @@ public class Dashboard extends javax.swing.JFrame {
         tampilanSupplier.setVisible(true);
     }//GEN-LAST:event_supplierKlikMouseClicked
 
+    private void btnSuppBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppBaruActionPerformed
+        // TODO add your handling code here:
+        new TambahSupplier().setVisible(true);
+    }//GEN-LAST:event_btnSuppBaruActionPerformed
+
+    private void btnRefreshSuppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshSuppActionPerformed
+        // TODO add your handling code here:
+        refreshSupplier();
+    }//GEN-LAST:event_btnRefreshSuppActionPerformed
+
+    private void tabelSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelSupplierMouseClicked
+        // TODO add your handling code here:
+        btnHapusSupplier.setVisible(true);
+        int nomor = tabelSupplier.getSelectedRow();
+        this.idSupplier = Integer.parseInt((String) tabelSupplier.getValueAt(nomor, 0));
+    }//GEN-LAST:event_tabelSupplierMouseClicked
+
+    private void btnHapusSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSupplierActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus data supplier ini?", "Warning", JOptionPane.WARNING_MESSAGE);
+        if(option == JOptionPane.OK_OPTION){
+            supplierModel.delete(idSupplier);
+            JOptionPane.showMessageDialog(null, "Berhasil menghapus data supplier", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            refreshSupplier();
+        }
+    }//GEN-LAST:event_btnHapusSupplierActionPerformed
+
+    private void refreshSupplier(){
+        tabelSupplier.setModel(new DefaultTableModel(supplierModel.selectAll(), listSupplier));
+        this.idSupplier = 0;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -725,6 +789,7 @@ public class Dashboard extends javax.swing.JFrame {
     //Deklarasi Supplier
     private Supplier supplierModel = new Supplier("supplier");
     private String[] listSupplier = {"ID", "Nama", "Alamat", "Nomor Telepon"};
+    private int idSupplier = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel barangKlik;
     private javax.swing.JButton btnAddPetugas;
@@ -733,9 +798,12 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnHapusPetugas;
+    private javax.swing.JButton btnHapusSupplier;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnLogout1;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnRefreshSupp;
+    private javax.swing.JButton btnSuppBaru;
     private javax.swing.JTextField findBarang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

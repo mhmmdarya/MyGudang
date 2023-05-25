@@ -6,6 +6,7 @@ package views.transaksi;
 
 import javax.swing.table.DefaultTableModel;
 import DB.BarangKeluar;
+import tools.Converter;
 
 /**
  *
@@ -20,11 +21,11 @@ public class TransaksiKeluar extends javax.swing.JFrame {
         initComponents();
         setDataTable(barangModels.selectAll());
     }
-    
-    private void setDataTable(Object[][] data){
+
+    private void setDataTable(Object[][] data) {
         tabelData.setModel(new DefaultTableModel(data, this.listData));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +39,9 @@ public class TransaksiKeluar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelData = new javax.swing.JTable();
         btnTambah = new javax.swing.JButton();
-        btnHapus = new javax.swing.JButton();
+        tglAwal = new com.toedter.calendar.JDateChooser();
+        tglAkhir = new com.toedter.calendar.JDateChooser();
+        btnFilter = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(83, 113, 136));
 
@@ -62,7 +65,12 @@ public class TransaksiKeluar extends javax.swing.JFrame {
             }
         });
 
-        btnHapus.setText("Hapus");
+        btnFilter.setText("Filter");
+        btnFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,17 +82,26 @@ public class TransaksiKeluar extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)
+                        .addComponent(tglAwal, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tglAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTambah)
-                    .addComponent(btnHapus))
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnTambah)
+                        .addComponent(tglAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tglAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnFilter)
+                        .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -109,6 +126,26 @@ public class TransaksiKeluar extends javax.swing.JFrame {
         // TODO add your handling code here:
         new InsertKeluar().setVisible(true);
     }//GEN-LAST:event_btnTambahActionPerformed
+    
+    private void setTabel(){
+        tabelData.setModel(new DefaultTableModel(barangModels.selectAll(), listData));
+    }
+    
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (tglAwal == null || tglAkhir == null) {
+                setTabel();
+            } else {
+                String awal = Converter.formatTanggal(tglAwal.getDate());
+                String akhir = Converter.formatTanggal(tglAkhir.getDate());
+                Object[][] data = Converter.convertArray(barangModels.filter(awal, akhir));
+                tabelData.setModel(new DefaultTableModel(data, listData));
+            }
+        } catch (Exception e) {
+            setTabel();
+        }
+    }//GEN-LAST:event_btnFilterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,14 +182,16 @@ public class TransaksiKeluar extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private BarangKeluar barangModels = new BarangKeluar("barang_keluar");
     private String[] listData = {"ID Transaksi", "Tanggal Keluar", "Jumlah", "Nama Barang", "Nama Petugas"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnTambah;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelData;
+    private com.toedter.calendar.JDateChooser tglAkhir;
+    private com.toedter.calendar.JDateChooser tglAwal;
     // End of variables declaration//GEN-END:variables
 }

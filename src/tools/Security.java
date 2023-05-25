@@ -23,6 +23,15 @@ public class Security {
         }
         return false;
     }
+    
+    public static boolean checkPhoneNumber(String phoneNumber){
+        try {
+            int number = Integer.parseInt(phoneNumber);
+            return false;
+        } catch (Exception e) {
+            return true;
+        }
+    }
 
     public static String hashPassword(String password) {
         try {
