@@ -87,7 +87,7 @@ public class BarangKeluar extends Models {
         String sql = "SELECT barang_keluar.id_transaksi, barang_keluar.tanggal_keluar, barang_keluar.jumlah, barang.nama AS nama_barang, petugas.nama AS nama_petugas\n"
                 + "FROM barang_keluar \n"
                 + "INNER JOIN barang ON barang_keluar.id_barang = barang.id_barang\n"
-                + "INNER JOIN petugas ON barang_keluar.id_petugas = petugas.id_petugas";
+                + "INNER JOIN petugas ON barang_keluar.id_petugas = petugas.id_petugas ORDER BY barang_keluar.id_transaksi ASC";
         try {
             Connection koneksi = super.getKoneksi();
             Statement st = koneksi.createStatement();

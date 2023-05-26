@@ -38,9 +38,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         labelNama.setText(nama);
         labelRole.setText(role);
+        
+        // set visible button
         btnHapus.setVisible(false);
         btnHapusSupplier.setVisible(false);
         btnEdit.setVisible(false);
+//        btn
+        tampilanSupplier.setVisible(false);
         tampilanPetugas.setVisible(false);
         tabelPetugas.setModel(new DefaultTableModel(petugasModel.getAllData(), listPetugas));
         setDataSupplier(supplierModel.selectAll());

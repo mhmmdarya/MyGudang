@@ -23,6 +23,14 @@ public class Security {
         }
         return false;
     }
+    public static boolean validatePassword(String password) {
+        for (int i = 0; i < password.length(); i++) {
+            if (password.charAt(i) >= 32 && password.charAt(i) <= 47) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     public static boolean checkPhoneNumber(String phoneNumber){
         try {

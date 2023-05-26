@@ -134,6 +134,20 @@ public class Petugas extends Models {
             e.printStackTrace();
         }
     }
+    
+    public void updatePassword(int id, String password) {
+        String sql = "UPDATE petugas SET password = ? WHERE id_petugas = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            password = Security.hashPassword(password);
+            st.setString(1, password);
+            st.setInt(2, id);
+            st.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public boolean checkUser(String username, String email) {
         String sql = "SELECT * FROM petugas WHERE username=? AND email=?";
@@ -151,6 +165,7 @@ public class Petugas extends Models {
         }
         return false;
     }
+    
     public boolean checkUser(String username) {
         String sql = "SELECT * FROM petugas WHERE username=?";
         try {

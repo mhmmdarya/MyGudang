@@ -26,7 +26,7 @@ public class BarangMasuk extends Models {
                 + "FROM barang_masuk\n"
                 + "INNER JOIN barang ON barang_masuk.id_barang = barang.id_barang\n"
                 + "INNER JOIN petugas ON barang_masuk.id_petugas = petugas.id_petugas\n"
-                + "INNER JOIN supplier ON barang_masuk.id_supplier = supplier.id_supplier";
+                + "INNER JOIN supplier ON barang_masuk.id_supplier = supplier.id_supplier ORDER BY barang_masuk.id_transaksi ASC";
         try {
             Connection koneksi = super.getKoneksi();
             Statement st = koneksi.createStatement();
