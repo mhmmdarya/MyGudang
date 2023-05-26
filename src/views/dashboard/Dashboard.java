@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import tools.Session;
 import tools.Converter;
 import views.barang.TambahBarang;
+import views.supplier.EditSupplier;
 import views.supplier.TambahSupplier;
 import views.transaksi.TransaksiKeluar;
 
@@ -110,6 +111,7 @@ public class Dashboard extends javax.swing.JFrame {
         btnSuppBaru = new javax.swing.JButton();
         btnRefreshSupp = new javax.swing.JButton();
         btnHapusSupplier = new javax.swing.JButton();
+        btnEditSupplier = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
 
@@ -478,7 +480,15 @@ public class Dashboard extends javax.swing.JFrame {
                 btnHapusSupplierActionPerformed(evt);
             }
         });
-        tampilanSupplier.add(btnHapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 110, -1));
+        tampilanSupplier.add(btnHapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, 110, -1));
+
+        btnEditSupplier.setText("Edit");
+        btnEditSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditSupplierActionPerformed(evt);
+            }
+        });
+        tampilanSupplier.add(btnEditSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 130, -1));
 
         jLayeredPane1.add(tampilanSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -521,6 +531,7 @@ public class Dashboard extends javax.swing.JFrame {
         btnHapus.setVisible(false);
         btnEdit.setVisible(false);
         this.idBarang = 0;
+        this.idPetugas = 0;
         this.namaBarang = "";
         setLabelTotal();
     }
@@ -670,6 +681,8 @@ public class Dashboard extends javax.swing.JFrame {
             petugasModel.deletePetugas(idPetugas);
             JOptionPane.showMessageDialog(null, "Berhasil menghapus data petugas", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             refresh();
+        } else if(option == JOptionPane.CANCEL_OPTION){
+            idPetugas = 0;
         }
     }//GEN-LAST:event_btnHapusPetugasActionPerformed
 
@@ -727,6 +740,16 @@ public class Dashboard extends javax.swing.JFrame {
             refreshSupplier();
         }
     }//GEN-LAST:event_btnHapusSupplierActionPerformed
+
+    private void btnEditSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSupplierActionPerformed
+        // TODO add your handling code here:
+        if(idSupplier == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data yang ingin diedit terlebih dahulu", "Warning", JOptionPane.WARNING_MESSAGE);
+            refreshSupplier();
+        } else {
+            new EditSupplier(idSupplier).setVisible(true);
+        }
+    }//GEN-LAST:event_btnEditSupplierActionPerformed
 
     private void refreshSupplier(){
         tabelSupplier.setModel(new DefaultTableModel(supplierModel.selectAll(), listSupplier));
@@ -796,6 +819,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnBarangKeluar;
     private javax.swing.JButton btnBarangMasuk;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEditSupplier;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnHapusPetugas;
     private javax.swing.JButton btnHapusSupplier;

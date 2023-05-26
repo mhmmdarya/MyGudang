@@ -6,6 +6,7 @@ package DB;
 
 import java.util.HashMap;
 import java.sql.*;
+import java.util.Arrays;
 
 /**
  *
@@ -61,6 +62,39 @@ public class Supplier extends Models {
         }
     }
     
+    public String[] getDataById(int id){
+        String sql = "SELECT nama, alamat, no_telp FROM supplier WHERE id_supplier = ?";
+        String[] result = new String[3];
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                result[0] = rs.getString(1);
+                result[1] = rs.getString(2);
+                result[2] = rs.getString(3);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public void edit(int id, String[] data){
+        String sql = "UPDATE supplier SET nama = ?, alamat = ?, no_telp = ? WHERE id_supplier = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, data[0]);
+            st.setString(2, data[1]);
+            st.setString(3, data[2]);
+            st.setInt(4, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
     public Object[][] getList() {
         Object[][] data = new Object[super.getTotalData()][2];
         String sql = "SELECT id_supplier, nama FROM " + super.table;
@@ -80,4 +114,8 @@ public class Supplier extends Models {
         }
         return data;
     }
+//    public static void main(String[] args) {
+//        Supplier sp = new Supplier("supplier");
+//        System.out.println(Arrays.toString(sp.getDataById(1)));
+//    }
 }
