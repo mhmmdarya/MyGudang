@@ -36,6 +36,39 @@ public class Petugas extends Models {
         }
         return hasil;
     }
+    
+    public void editProfile(int id, String[] data){
+        String sql = "UPDATE petugas SET nama = ?, email = ?, username = ? WHERE id_petugas = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setString(1, data[0]);
+            st.setString(2, data[1]);
+            st.setString(3, data[2]);
+            st.setInt(4, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
+    public String[] getDataById(int id){
+        String sql = "SELECT nama, email, username FROM petugas WHERE id_petugas = ?";
+        String[] result = new String[3];
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                result[0] = rs.getString(1);
+                result[1] = rs.getString(2);
+                result[2] = rs.getString(3);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public Object[][] getAllData() {
         Object[][] hasil = new Object[super.getTotalData()][6];
@@ -133,7 +166,24 @@ public class Petugas extends Models {
         }
         return false;
     }
-
+    
+    public boolean confirmPassword(int id, String password){
+        String sql = "SELECT * FROM petugas WHERE id_petugas = ? AND password = ?";
+        try {
+            Connection koneksi = super.getKoneksi();
+            PreparedStatement st = koneksi.prepareCall(sql);
+            st.setInt(1, id);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     public boolean authLogin(String username, String password) {
         password = Security.hashPassword(password);
         String QUERY = "SELECT username, password FROM " + super.table + " WHERE username=? AND password=?";

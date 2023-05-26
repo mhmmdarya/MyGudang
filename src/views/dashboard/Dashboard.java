@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import tools.Session;
 import tools.Converter;
 import views.barang.TambahBarang;
+import views.petugas.EditProfile;
 import views.supplier.EditSupplier;
 import views.supplier.TambahSupplier;
 import views.transaksi.TransaksiKeluar;
@@ -136,6 +137,17 @@ public class Dashboard extends javax.swing.JFrame {
         labelNama.setForeground(new java.awt.Color(255, 255, 255));
         labelNama.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelNama.setText("nama");
+        labelNama.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelNamaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labelNamaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelNamaMouseExited(evt);
+            }
+        });
         panelUser.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 230, 20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/home.png"))); // NOI18N
@@ -750,6 +762,21 @@ public class Dashboard extends javax.swing.JFrame {
             new EditSupplier(idSupplier).setVisible(true);
         }
     }//GEN-LAST:event_btnEditSupplierActionPerformed
+
+    private void labelNamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelNamaMouseClicked
+        // TODO add your handling code here:
+        new EditProfile(Session.getId()).setVisible(true);
+    }//GEN-LAST:event_labelNamaMouseClicked
+
+    private void labelNamaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelNamaMouseEntered
+        // TODO add your handling code here:
+        labelNama.setForeground(Color.DARK_GRAY);
+    }//GEN-LAST:event_labelNamaMouseEntered
+
+    private void labelNamaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelNamaMouseExited
+        // TODO add your handling code here:
+        labelNama.setForeground(Color.WHITE);
+    }//GEN-LAST:event_labelNamaMouseExited
 
     private void refreshSupplier(){
         tabelSupplier.setModel(new DefaultTableModel(supplierModel.selectAll(), listSupplier));
