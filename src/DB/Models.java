@@ -13,7 +13,7 @@ import tools.Config;
  *
  * @author ASUS
  */
-public class Models {
+public class Models implements Database {
 
     protected String table;
 
@@ -27,6 +27,7 @@ public class Models {
         this.table = tableName;
     }
 
+    @Override
     public int getTotalData() {
         String QUERY = "SELECT COUNT(\'*\') FROM " + table;
         try {
@@ -42,6 +43,7 @@ public class Models {
         return 0;
     }
 
+    @Override
     public int getTotalColumn() {
         String QUERY = "SELECT * FROM " + table;
         try {
@@ -56,10 +58,11 @@ public class Models {
         return 0;
     }
 
-    protected Connection getKoneksi() {
+    @Override
+    public Connection getKoneksi() {
         Connection koneksi = null;
         try {
-            koneksi = DriverManager.getConnection("jdbc:mysql://localhost:"+ Config.env("PORT") + "/" + Config.env("DATABASE_NAME"), Config.env("DB_USERNAME"), Config.env("DB_PASSWORD"));
+            koneksi = DriverManager.getConnection("jdbc:mysql://localhost:" + Config.env("PORT") + "/" + Config.env("DATABASE_NAME"), Config.env("DB_USERNAME"), Config.env("DB_PASSWORD"));
             return koneksi;
         } catch (SQLException err) {
             err.printStackTrace();
@@ -67,7 +70,7 @@ public class Models {
         return koneksi;
     }
 
-
+    @Override
     public Object[][] selectAll() {
         String QUERY = "SELECT * FROM " + table;
         int totalData = this.getTotalData();

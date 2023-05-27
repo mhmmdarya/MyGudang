@@ -1,12 +1,13 @@
-Tugas Proyek Akhir dari Mata Kuliah Pemrograman Berorientasi Objek
-Bahasa yang digunakan adalah Java
+Aplikasi MyGudang yang berfungsi untuk menyimpan semua data Barang, mencatat barang masuk dan keluar
+
+Link Repositories : https://github.com/mhmmdarya/MyGudang
 
 Nama Kelompok : Pembantai
 
 kelompok terdiri dari:
-- Muhammad Arya Kusuma
-- Muhamad Imam Wicaksono
-- Yahya
+- Muhammad Arya Kusuma, B, 1402022039
+- Muhamad Imam Wicaksono, A, 1402022038
+- Yahya Al Ghazali, B, 1402022065 
 
 Cara menggunakkan aplikasi ini
 - clone repo ini
