@@ -1,6 +1,8 @@
 Tugas Proyek Akhir dari Mata Kuliah Pemrograman Berorientasi Objek
 Bahasa yang digunakan adalah Java
 
+Nama Kelompok : Pembantai
+
 kelompok terdiri dari:
 - Muhammad Arya Kusuma
 - Muhamad Imam Wicaksono

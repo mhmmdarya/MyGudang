@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2023 at 07:00 PM
+-- Generation Time: May 27, 2023 at 12:45 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -34,14 +34,6 @@ CREATE TABLE `barang` (
   `id_supplier` int(11) NOT NULL
 ) ;
 
---
--- Dumping data for table `barang`
---
-
-INSERT INTO `barang` (`id_barang`, `nama`, `jumlah`, `id_supplier`) VALUES
-(119, 'Sabun Lifeboy', 55, 1),
-(120, 'Gembok', 7, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -55,16 +47,6 @@ CREATE TABLE `barang_keluar` (
   `id_barang` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `barang_keluar`
---
-
-INSERT INTO `barang_keluar` (`id_transaksi`, `tanggal_keluar`, `jumlah`, `id_barang`, `id_petugas`) VALUES
-(2, '2023-05-15', 2, 119, 1),
-(3, '2023-05-01', 20, 119, 1),
-(7, '2023-05-01', 19, 120, 1),
-(8, '2023-05-24', 100, 119, 1);
 
 --
 -- Triggers `barang_keluar`
@@ -89,26 +71,6 @@ CREATE TABLE `barang_masuk` (
   `id_petugas` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `barang_masuk`
---
-
-INSERT INTO `barang_masuk` (`id_transaksi`, `jumlah`, `tanggal_masuk`, `id_supplier`, `id_petugas`, `id_barang`) VALUES
-(3, 5, '2023-05-01', 1, 1, 119),
-(4, 3, '2023-05-17', 1, 1, 119),
-(5, 10, '2023-05-01', 1, 1, 119),
-(6, 17, '2023-01-20', 6, 1, 119),
-(8, 11, '2023-01-30', 10, 2, 119),
-(10, 26, '2023-05-02', 15, 1, 119),
-(12, 23, '2023-03-10', 1, 2, 120),
-(14, 30, '2023-03-03', 3, 1, 119),
-(16, 22, '2023-04-07', 4, 1, 119),
-(17, 12, '2023-01-11', 13, 2, 119),
-(19, 20, '2023-05-02', 16, 1, 120),
-(20, 19, '2023-01-21', 20, 2, 119),
-(22, 6, '2023-05-24', 4, 1, 120),
-(23, 10, '2023-05-24', 1, 1, 119);
 
 --
 -- Triggers `barang_masuk`
@@ -140,9 +102,10 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `nama`, `jenis_kelamin`, `email`, `username`, `password`, `role`) VALUES
-(1, 'Muhammad Arya', 'Pria', 'muhammad@gmail.com', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin'),
+(1, 'Muhammad Arya Kusuma', 'Pria', 'muhammad@gmail.com', 'admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Admin'),
 (2, 'Muhammad Imam', 'Pria', 'imam@gmail.com', 'imam', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Petugas'),
-(13, 'Yahya', 'Pria', 'yahya@gmail.com', 'yahya', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin');
+(13, 'Yahya', 'Pria', 'yahya@gmail.com', 'yahya', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin'),
+(14, 'Reza', 'Pria', 'reza@gmail.com', 'reza', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Petugas');
 
 -- --------------------------------------------------------
 
@@ -154,7 +117,7 @@ CREATE TABLE `supplier` (
   `id_supplier` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `no_telp` char(13) NOT NULL
+  `no_telp` varchar(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -162,26 +125,16 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id_supplier`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 'Rita Telecommunication Inc.', '572 Fifth Avenue', '248792022974'),
-(2, 'West Brothers LLC', '97 Diplomacy Drive', '992920667481'),
-(3, 'Kim Electronic Inc.', '823 Lark Street', '765247922354'),
-(4, 'Guzman\'s Pharmaceutical Inc.', '31 Maddox Street', '141010825624'),
-(5, 'Owens\'s Electronic Inc.', '559 Central Avenue', '077545119178'),
-(6, 'Walter Software LLC', '315 Tremont Road', '473530766230'),
-(7, 'Gloria Inc.', '248 Edward Ave, Braunstone Town', '506540617633'),
-(8, 'Patel Network Systems LLC', '29 Pollen Street', '689574539283'),
-(9, 'Daniel Logistic Inc.', '800 Grape Street', '276383482659'),
-(10, 'Donald LLC', '813 Central Avenue', '332561435548'),
-(11, 'Anderson Brothers Electronic Inc.', '196 Flatbush Ave', '354183728018'),
-(12, 'Connie LLC', '673 Papworth Rd, Trumpington', '979586115459'),
-(13, 'Palmer Brothers Pharmaceutical Inc.', '197 Riverview Road', '459078872633'),
-(14, 'Jimmy Technology Inc.', '3 New Street', '090819003259'),
-(15, 'Butler Inc.', '972 Wooster Street', '045497068851'),
-(16, 'Chad Consultants LLC', '593 East Alley', '763123320150'),
-(17, 'Hall Communications LLC', '991 Wooster Street', '377743238440'),
-(18, 'Herrera\'s Inc.', '166 Sky Way', '690728983332'),
-(19, 'Frances Technology LLC', '985 New Street', '388033219650'),
-(20, 'Thomas Telecommunication LLC', '540 Abingdon Rd, Cumnor', '225767028215');
+(22, 'PT.Sumur Abadi', 'Jl. Kecapi Barat', '341225137'),
+(23, 'PT.Sabar Subur', 'Jl. Angsana Bara', '435454353'),
+(24, 'PT.Cipta Karya', 'Jl.Pinangsia 2', '324353464'),
+(25, 'PT.Aman Sentosa', 'Jl.Keabadian 4', '654765887'),
+(26, 'PT.Kencana Sumatra', 'Jl.SumurBatu 7', '078886563'),
+(27, 'PT.Hifivee', 'Jl.Tambora Raya', '576987544'),
+(28, 'PT.Alam Sutra', 'Jl.Bogor Raya ', '230988977'),
+(29, 'PT.Angga Dewata', 'Jl.Gunung Sahari Raya', '769586765'),
+(30, 'PT.LamongSewu', 'Jl.PemalangKota', '654896564'),
+(31, 'PT.AbadiJaya', 'Jl.KemurnianRaya', '965807965');
 
 --
 -- Indexes for dumped tables
@@ -237,25 +190,25 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
