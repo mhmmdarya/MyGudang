@@ -5,9 +5,11 @@
 package views.petugas;
 
 import DB.Petugas;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import tools.Security;
 import tools.Session;
+import views.login.Login;
 
 /**
  *
@@ -20,6 +22,10 @@ public class EditProfile extends javax.swing.JFrame {
      */
     public EditProfile(int id) {
         initComponents();
+        // set icon
+        ImageIcon icon = new ImageIcon(Login.class.getResource("/assets/images/icon.png"));
+        setIconImage(icon.getImage());
+        
         String[] data = petugasModel.getDataById(id);
         setData(data);
     }
@@ -44,6 +50,7 @@ public class EditProfile extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnGantiPassword = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 65, 65));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,6 +85,11 @@ public class EditProfile extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGantiPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 146, -1));
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Edit Profile Anda");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,6 +138,7 @@ public class EditProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField namaTxt;

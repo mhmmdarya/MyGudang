@@ -42,34 +42,38 @@ public class TambahSupplier extends javax.swing.JFrame {
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(99, 129, 174));
+        jPanel1.setBackground(new java.awt.Color(83, 113, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(namaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 92, 302, -1));
-        jPanel1.add(alamatTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 132, 302, -1));
-        jPanel1.add(nomorTelpTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 172, 302, -1));
+        jPanel1.add(namaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 92, 350, -1));
+        jPanel1.add(alamatTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 132, 350, -1));
+        jPanel1.add(nomorTelpTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 172, 350, -1));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nama");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 95, 37, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 37, -1));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Alamat");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 135, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nomor Telpon");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 175, 96, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 96, -1));
 
-        btnInsert.setText("tambah");
+        btnInsert.setText("Tambah Data");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
             }
         });
-        jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 212, 302, -1));
+        jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 212, 440, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tambah Supplier");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 310));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 270));
 
         pack();
         setLocationRelativeTo(null);

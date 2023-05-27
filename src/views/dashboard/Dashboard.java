@@ -40,6 +40,7 @@ public class Dashboard extends javax.swing.JFrame {
 //        btn
         tampilanSupplier.setVisible(false);
         tampilanPetugas.setVisible(false);
+        tampilanBarang.setVisible(true);
         tabelPetugas.setModel(new DefaultTableModel(petugasModel.getAllData(), listPetugas));
         setDataSupplier(supplierModel.selectAll());
     }
@@ -288,7 +289,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        tampilanBarang.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 160, 30));
+        tampilanBarang.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 160, 30));
 
         findBarang.setText("Cari barang berdasarkan nama");
         findBarang.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -317,7 +318,7 @@ public class Dashboard extends javax.swing.JFrame {
                 btnBarangMasukActionPerformed(evt);
             }
         });
-        tampilanBarang.add(btnBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 110, 30));
+        tampilanBarang.add(btnBarangMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 110, 30));
 
         btnBarangKeluar.setText("Barang Keluar");
         btnBarangKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +326,7 @@ public class Dashboard extends javax.swing.JFrame {
                 btnBarangKeluarActionPerformed(evt);
             }
         });
-        tampilanBarang.add(btnBarangKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 110, 30));
+        tampilanBarang.add(btnBarangKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 110, 30));
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -393,7 +394,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         tampilanPetugas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 840, 400));
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Daftar Petugas");
@@ -402,13 +403,13 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/6345962.png"))); // NOI18N
         tampilanPetugas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        btnAddPetugas.setText("Tambah");
+        btnAddPetugas.setText("Tambah Data Petugas Baru");
         btnAddPetugas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddPetugasActionPerformed(evt);
             }
         });
-        tampilanPetugas.add(btnAddPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 120, -1));
+        tampilanPetugas.add(btnAddPetugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 190, -1));
 
         btnHapusPetugas.setText("Hapus");
         btnHapusPetugas.addActionListener(new java.awt.event.ActionListener() {
@@ -522,11 +523,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
         tampilanSupplier.add(btnLogout2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, 30));
 
-        jLabel8.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("SUPPLIER");
-        tampilanSupplier.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 73, 130, 40));
+        jLabel8.setText("Daftar Supplier");
+        tampilanSupplier.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 73, 220, 40));
 
         jLayeredPane1.add(tampilanSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 670));
 
@@ -600,6 +601,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void barangKlikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barangKlikMouseClicked
         tampilanPetugas.setVisible(false);
+        tampilanSupplier.setVisible(false);
         tampilanBarang.setVisible(true);
     }//GEN-LAST:event_barangKlikMouseClicked
 
