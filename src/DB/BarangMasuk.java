@@ -42,7 +42,9 @@ public class BarangMasuk extends Models {
                 data[nomor] = new Object[]{id, tanggal, jml, namaBarang, namaSupplier, namaPetugas};
                 nomor++;
             }
+            koneksi.close();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return data;
     }
@@ -70,6 +72,7 @@ public class BarangMasuk extends Models {
                 String namaPetugas = rs.getString(6);
                 data.add(new Object[]{id, tanggal, jml, namaBarang, namaSupplier, namaPetugas});
             }
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,6 +90,7 @@ public class BarangMasuk extends Models {
             if(rs.next()){
                 return rs.getInt(1);
             }
+            koneksi.close();
         } catch (SQLException err) {
             err.printStackTrace();
         }
@@ -104,6 +108,7 @@ public class BarangMasuk extends Models {
             st.setInt(4, idSupplier);
             st.setInt(5, idPetugas);
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

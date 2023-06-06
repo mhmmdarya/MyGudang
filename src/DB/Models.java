@@ -37,6 +37,7 @@ public class Models implements Database {
             if (rs.next()) {
                 return rs.getInt(1);
             }
+            koneksi.close();
         } catch (SQLException err) {
             err.printStackTrace();
         }
@@ -51,6 +52,7 @@ public class Models implements Database {
             Statement st = koneksi.createStatement();
             ResultSet rs = st.executeQuery(QUERY);
             ResultSetMetaData metaData = rs.getMetaData();
+            koneksi.close();
             return metaData.getColumnCount();
         } catch (SQLException err) {
             err.printStackTrace();
@@ -87,6 +89,7 @@ public class Models implements Database {
                 }
                 nomor++;
             }
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

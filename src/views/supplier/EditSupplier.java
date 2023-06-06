@@ -48,6 +48,8 @@ public class EditSupplier extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnEdit = new javax.swing.JButton();
 
+        setResizable(false);
+
         jPanel1.setBackground(new java.awt.Color(83, 113, 136));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

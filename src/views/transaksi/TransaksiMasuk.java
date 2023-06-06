@@ -52,6 +52,8 @@ public class TransaksiMasuk extends javax.swing.JFrame {
         btnRefresh = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setResizable(false);
+
         jPanel1.setBackground(new java.awt.Color(83, 113, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

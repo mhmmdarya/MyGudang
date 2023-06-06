@@ -30,6 +30,7 @@ public class Petugas extends Models {
                 hasil[1] = rs.getString(2);
                 hasil[2] = rs.getString(3);
             }
+            koneksi.close();
             return hasil;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,6 +47,7 @@ public class Petugas extends Models {
             st.setString(2, data[1]);
             st.setString(3, data[2]);
             st.setInt(4, id);
+            koneksi.close();
             st.executeUpdate();
         } catch (SQLException e) {
         }
@@ -64,6 +66,7 @@ public class Petugas extends Models {
                 result[1] = rs.getString(2);
                 result[2] = rs.getString(3);
             }
+            koneksi.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,6 +88,7 @@ public class Petugas extends Models {
                 }
                 nomor++;
             }
+            koneksi.close();
             return hasil;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,6 +103,7 @@ public class Petugas extends Models {
             PreparedStatement st = koneksi.prepareCall(sql);
             st.setInt(1, id);
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException err) {
             err.printStackTrace();
         }
@@ -116,6 +121,7 @@ public class Petugas extends Models {
             st.setString(5, data[4]);
             st.setString(6, data[5]);
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,6 +150,7 @@ public class Petugas extends Models {
             st.setString(1, password);
             st.setInt(2, id);
             st.execute();
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -160,6 +167,7 @@ public class Petugas extends Models {
             if (rs.next()) {
                 return true;
             }
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -176,6 +184,7 @@ public class Petugas extends Models {
             if (rs.next()) {
                 return true;
             }
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -193,6 +202,7 @@ public class Petugas extends Models {
             if(rs.next()){
                 return true;
             }
+            koneksi.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -211,6 +221,7 @@ public class Petugas extends Models {
             if (rs.next()) {
                 return Security.compareHash(password, rs.getString(2));
             }
+            koneksi.close();
         } catch (SQLException err) {
             err.printStackTrace();
         }

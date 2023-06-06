@@ -40,6 +40,7 @@ public class TambahSupplier extends javax.swing.JFrame {
         btnInsert = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(83, 113, 136));

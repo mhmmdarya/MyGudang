@@ -52,6 +52,8 @@ public class EditProfile extends javax.swing.JFrame {
         btnGantiPassword = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
+        setResizable(false);
+
         jPanel1.setBackground(new java.awt.Color(0, 65, 65));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(namaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 206, -1));

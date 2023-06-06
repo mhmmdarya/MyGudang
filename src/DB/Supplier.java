@@ -19,7 +19,6 @@ public class Supplier extends Models {
     }
     
     public int findId(String name){
-//        Object[] data = new Object[super.getTotalColumn()];
         String sql = "SELECT id_supplier FROM supplier WHERE nama=?";
         try {
             Connection koneksi = super.getKoneksi();
@@ -30,6 +29,7 @@ public class Supplier extends Models {
             if (rs.next()) {
                 return rs.getInt(1);
             }
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,6 +43,7 @@ public class Supplier extends Models {
             PreparedStatement st = koneksi.prepareCall(sql);
             st.setInt(1, id);
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException err) {
             err.printStackTrace();
         }
@@ -57,6 +58,7 @@ public class Supplier extends Models {
             st.setString(2, data[1]);
             st.setString(3, data[2]);
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,6 +77,7 @@ public class Supplier extends Models {
                 result[1] = rs.getString(2);
                 result[2] = rs.getString(3);
             }
+            koneksi.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,6 +94,7 @@ public class Supplier extends Models {
             st.setString(3, data[2]);
             st.setInt(4, id);
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException e) {
         }
     }
@@ -109,13 +113,10 @@ public class Supplier extends Models {
                 data[nomor][1] = rs.getString(2);
                 nomor++;
             }
+            koneksi.close();
         } catch (Exception err) {
             err.printStackTrace();
         }
         return data;
     }
-//    public static void main(String[] args) {
-//        Supplier sp = new Supplier("supplier");
-//        System.out.println(Arrays.toString(sp.getDataById(1)));
-//    }
 }

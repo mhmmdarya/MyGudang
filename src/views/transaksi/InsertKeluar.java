@@ -53,6 +53,7 @@ public class InsertKeluar extends javax.swing.JFrame {
         btnKeluar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

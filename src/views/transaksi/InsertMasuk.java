@@ -56,6 +56,7 @@ public class InsertMasuk extends javax.swing.JFrame {
         inputTgl = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
 
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -30,6 +30,7 @@ public class BarangKeluar extends Models {
             st.setInt(3, jumlah);
             st.setInt(4, idPetugas);
             st.executeUpdate();
+            koneksi.close();
             return true;
         } catch (SQLException e) {
             return false;
@@ -48,6 +49,7 @@ public class BarangKeluar extends Models {
             if (rs.next()) {
                 return rs.getInt(1);
             }
+            koneksi.close();
         } catch (SQLException err) {
             err.printStackTrace();
         }
@@ -74,6 +76,7 @@ public class BarangKeluar extends Models {
                 String namaBarang = rs.getString(4);
                 String namaPetugas = rs.getString(5);
                 data.add(new Object[]{id, tanggal, jml, namaBarang, namaPetugas});
+                koneksi.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,6 +105,7 @@ public class BarangKeluar extends Models {
                 data[nomor] = new Object[]{id, tanggal, jml, namaBarang, namaPetugas};
                 nomor++;
             }
+            koneksi.close();
         } catch (SQLException e) {
         }
         return data;
