@@ -74,11 +74,11 @@ public class EditProfile extends javax.swing.JFrame {
 
         jLabel2.setForeground(new java.awt.Color(242, 242, 242));
         jLabel2.setText("Email");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 37, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 37, -1));
 
         jLabel3.setForeground(new java.awt.Color(242, 242, 242));
         jLabel3.setText("Username");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 58, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 58, -1));
 
         btnGantiPassword.setText("Ganti Password");
         btnGantiPassword.addActionListener(new java.awt.event.ActionListener() {

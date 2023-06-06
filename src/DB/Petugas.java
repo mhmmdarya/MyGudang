@@ -47,8 +47,8 @@ public class Petugas extends Models {
             st.setString(2, data[1]);
             st.setString(3, data[2]);
             st.setInt(4, id);
-            koneksi.close();
             st.executeUpdate();
+            koneksi.close();
         } catch (SQLException e) {
         }
     }
